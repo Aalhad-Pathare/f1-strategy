@@ -112,11 +112,11 @@ The deployed system is small on purpose. Five services, each carrying real load:
 
 Cold start ~0.33s, warm ~0.28s.
 
-**Also created, but not serving traffic:** a CloudFront distribution and Origin
-Access Control (`deploy/deploy-cdn.sh`), left over from working around the blocked
-Function URL described below. The distribution is **disabled**. It is kept because
-the script is a working reference for the OAC pattern, not because anything uses
-it. `deploy/teardown.sh` removes it.
+That is the whole deployed footprint. A CloudFront distribution and Origin Access
+Control existed briefly while working around the blocked Function URL described
+below; both have been deleted, along with the Lambda resource-policy statement
+that let CloudFront invoke the function. `deploy/deploy-cdn.sh` is kept as a
+working reference for the OAC pattern, but nothing runs it.
 
 ### What is not on AWS
 
