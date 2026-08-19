@@ -160,10 +160,15 @@ def race_state(laps: pd.DataFrame, lap: int) -> dict[str, CarState]:
 
     # Cumulative race time. Missing lap times (e.g. lap 1 quirks) are filled
     # with the driver's median so gaps stay meaningful rather than vanishing.
+    # A driver with no timed laps at all has an unknowable cumulative time; say
+    # so explicitly rather than taking a median of nothing, which is where the
+    # affected Miami 2025 cars ended up.
     cum: dict[str, float] = {}
     for drv, g in upto.groupby("Driver"):
         t = g["LapTimeSec"]
-        cum[drv] = float(t.fillna(t.median()).sum())
+        valid = t.dropna()
+        cum[drv] = float(t.fillna(valid.median()).sum()) if not valid.empty \
+            else float("nan")
 
     at_lap = upto[upto["LapNumber"] == lap].set_index("Driver")
     states: dict[str, CarState] = {}
@@ -361,6 +366,20 @@ def recommend(laps: pd.DataFrame, race_slug: str, lap: int,
             cost_of_pitting_now=float("nan"), confidence="low",
             reason="driver not running at this lap", plans=[], rival_calls=[],
             pit_loss=pit_loss,
+        )
+
+    # Some sessions are missing FastF1's timing-app data, which carries stint,
+    # compound and tyre life together - Miami 2025 lacks it for 15 drivers across
+    # 354 laps. Without a known compound there is nothing to project a stint on,
+    # and falling back to a placeholder would produce confident-looking numbers
+    # from a guessed tyre.
+    if not me.compound:
+        return Recommendation(
+            race=race_slug, lap=lap, driver=driver, state=me,
+            action="NO_ADVICE", compound=None, optimal_pit_lap=None,
+            cost_of_pitting_now=float("nan"), confidence="low",
+            reason="tyre compound not recorded for this lap upstream",
+            plans=[], rival_calls=[], pit_loss=pit_loss,
         )
 
     # Wet races are a track-drying problem, not a tyre-wear one. The model has

@@ -115,7 +115,11 @@ def build_meta(year: int, rnd, event_name: str, laps: pd.DataFrame,
         "n_laps_rows": int(len(laps)),
         "n_clean_laps": int(laps["IsCleanLap"].sum()),
         "green_pct": round(100.0 * laps["IsGreen"].mean(), 1),
-        "compounds": sorted(laps["Compound"].dropna().unique().tolist()),
+        "compounds": sorted(
+            c for c in laps["Compound"].dropna().astype(str).str.strip().unique()
+            # FastF1 serialises a missing compound as text in some sessions.
+            if c.lower() not in {"", "nan", "none", "null", "unknown", "<na>"}
+        ),
         "drivers": drivers,
         "colors": extract_colors(ses, laps) if ses is not None else {},
     }

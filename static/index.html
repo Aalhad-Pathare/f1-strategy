@@ -245,7 +245,8 @@ const cmpColor = c => readable((RACE?.colors?.compounds?.[c]) || CMP_FALLBACK[c]
 const cmpChip = c => {
   if (!c) return '—';
   const fill = c === 'HARD' ? '' : ' fill';
-  return `<span class="cmp" style="--cmp:${cmpColor(c)}"><b class="${fill.trim()}"></b>${c.slice(0,3)}</span>`;
+  // Single-initial labels, as used on the timing screens: H M S I W.
+  return `<span class="cmp" style="--cmp:${cmpColor(c)}"><b class="${fill.trim()}"></b>${c[0]}</span>`;
 };
 
 async function get(url){

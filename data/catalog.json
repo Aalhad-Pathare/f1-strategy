@@ -1,5 +1,168 @@
 [
  {
+  "slug": "2022_miami",
+  "year": 2022,
+  "round": 5,
+  "event": "Miami Grand Prix",
+  "total_laps": 57,
+  "n_drivers": 20,
+  "n_laps_rows": 1057,
+  "n_clean_laps": 805,
+  "green_pct": 81.1,
+  "compounds": [
+   "HARD",
+   "MEDIUM",
+   "SOFT"
+  ],
+  "drivers": [
+   {
+    "Driver": "ALB",
+    "DriverNumber": "23",
+    "Team": "Williams"
+   },
+   {
+    "Driver": "ALO",
+    "DriverNumber": "14",
+    "Team": "Alpine"
+   },
+   {
+    "Driver": "BOT",
+    "DriverNumber": "77",
+    "Team": "Alfa Romeo"
+   },
+   {
+    "Driver": "GAS",
+    "DriverNumber": "10",
+    "Team": "AlphaTauri"
+   },
+   {
+    "Driver": "HAM",
+    "DriverNumber": "44",
+    "Team": "Mercedes"
+   },
+   {
+    "Driver": "LAT",
+    "DriverNumber": "6",
+    "Team": "Williams"
+   },
+   {
+    "Driver": "LEC",
+    "DriverNumber": "16",
+    "Team": "Ferrari"
+   },
+   {
+    "Driver": "MAG",
+    "DriverNumber": "20",
+    "Team": "Haas F1 Team"
+   },
+   {
+    "Driver": "MSC",
+    "DriverNumber": "47",
+    "Team": "Haas F1 Team"
+   },
+   {
+    "Driver": "NOR",
+    "DriverNumber": "4",
+    "Team": "McLaren"
+   },
+   {
+    "Driver": "OCO",
+    "DriverNumber": "31",
+    "Team": "Alpine"
+   },
+   {
+    "Driver": "PER",
+    "DriverNumber": "11",
+    "Team": "Red Bull Racing"
+   },
+   {
+    "Driver": "RIC",
+    "DriverNumber": "3",
+    "Team": "McLaren"
+   },
+   {
+    "Driver": "RUS",
+    "DriverNumber": "63",
+    "Team": "Mercedes"
+   },
+   {
+    "Driver": "SAI",
+    "DriverNumber": "55",
+    "Team": "Ferrari"
+   },
+   {
+    "Driver": "STR",
+    "DriverNumber": "18",
+    "Team": "Aston Martin"
+   },
+   {
+    "Driver": "TSU",
+    "DriverNumber": "22",
+    "Team": "AlphaTauri"
+   },
+   {
+    "Driver": "VER",
+    "DriverNumber": "1",
+    "Team": "Red Bull Racing"
+   },
+   {
+    "Driver": "VET",
+    "DriverNumber": "5",
+    "Team": "Aston Martin"
+   },
+   {
+    "Driver": "ZHO",
+    "DriverNumber": "24",
+    "Team": "Alfa Romeo"
+   }
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#da291c",
+    "VER": "#0600ef",
+    "SAI": "#da291c",
+    "PER": "#0600ef",
+    "BOT": "#900000",
+    "GAS": "#2b4562",
+    "ALO": "#fe86bc",
+    "HAM": "#00f5d0",
+    "NOR": "#ff8000",
+    "TSU": "#2b4562",
+    "RIC": "#ff8000",
+    "MSC": "#b6babd",
+    "MAG": "#b6babd",
+    "ZHO": "#900000",
+    "RUS": "#00f5d0",
+    "ALB": "#00a0dd",
+    "LAT": "#00a0dd",
+    "OCO": "#fe86bc",
+    "STR": "#00665e",
+    "VET": "#00665e"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alfa Romeo": "#900000",
+    "AlphaTauri": "#2b4562",
+    "Alpine": "#fe86bc",
+    "Aston Martin": "#00665e",
+    "Ferrari": "#da291c",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#00f5d0",
+    "Red Bull Racing": "#0600ef",
+    "Williams": "#00a0dd"
+   }
+  }
+ },
+ {
   "slug": "2024_bahrain",
   "year": 2024,
   "round": 1,
@@ -4712,8 +4875,7 @@
   "green_pct": 87.7,
   "compounds": [
    "HARD",
-   "MEDIUM",
-   "nan"
+   "MEDIUM"
   ],
   "drivers": [
    {
@@ -5836,8 +5998,7 @@
   "compounds": [
    "HARD",
    "INTERMEDIATE",
-   "MEDIUM",
-   "None"
+   "MEDIUM"
   ],
   "drivers": [
    {

@@ -153,6 +153,10 @@ colour, so the livery stays recognisable.
 - **Pit loss falls back to 21 s** in 4 of 39 races that offer no representative
   green-flag stop (Monaco 2024's lap-1 red flag let the whole field change tyres,
   so every observation is a red-flag stop).
+- **Some sessions lack tyre data entirely.** FastF1's timing-app feed carries
+  stint, compound and tyre life together, and it is missing for 15 drivers across
+  354 laps of Miami 2025. Those laps cannot be attributed to a compound, so the
+  engine declines to advise on them rather than projecting a guessed tyre.
 - **Degradation is linear.** Real tyres fall off a cliff; a linear fit will
   understate very long stints.
 

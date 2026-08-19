@@ -14,8 +14,14 @@ the stored files stay faithful to the source:
    advances one lap at a time, so age = lap - first_lap_of_stint + 1, anchored
    to whatever real TyreLife values the stint does have.
 
-2. `IsCleanLap` must additionally require a finite tyre age, since a lap with
-   unknown age cannot train a degradation model.
+2. `Compound` arrives as the literal strings "nan" or "None" in some sessions
+   (354 rows in Miami 2025, 57 in Belgium 2025). Those survive `notna()`, so
+   without repair the pace model fits "NAN" as if it were a real tyre compound -
+   it was doing exactly that on a third of Miami 2025. Compound is constant
+   within a stint, so the real value is recovered from the stint's other laps.
+
+3. `IsCleanLap` must additionally require a finite tyre age and a known
+   compound, since neither can be inferred from a single lap alone.
 
 Reconstruction understates age only when a stint starts on a scrubbed tyre
 (typically the grid tyre from qualifying), so `TyreAgeExact` records which laps
@@ -122,11 +128,37 @@ def _repair_tyre_age(laps: pd.DataFrame) -> pd.DataFrame:
     return laps
 
 
+# FastF1 sometimes serialises a missing compound as text rather than a null.
+_BOGUS_COMPOUNDS = {"", "nan", "none", "null", "unknown", "<na>"}
+
+
+def _repair_compound(laps: pd.DataFrame) -> pd.DataFrame:
+    laps = laps.copy()
+    comp = laps["Compound"].astype("string").str.strip()
+    comp = comp.mask(comp.str.lower().isin(_BOGUS_COMPOUNDS))
+    laps["CompoundExact"] = comp.notna()
+
+    # A stint runs on one set of tyres, so any lap of it identifies the compound
+    # for all of them. Mode rather than first: robust to a single bad value.
+    def _fill(g: pd.Series) -> pd.Series:
+        known = g.dropna()
+        if known.empty:
+            return g
+        return g.fillna(known.mode().iloc[0])
+
+    laps["Compound"] = (
+        comp.groupby([laps["Driver"], laps["Stint"]], dropna=False)
+        .transform(_fill)
+        .str.upper()
+    )
+    return laps
+
+
 def load_race(slug: str) -> pd.DataFrame:
     path = DATA / f"{slug}.parquet"
     if not path.exists():
         raise FileNotFoundError(f"no race data for {slug!r}")
-    laps = _repair_tyre_age(pd.read_parquet(path))
+    laps = _repair_compound(_repair_tyre_age(pd.read_parquet(path)))
     laps["IsCleanLap"] = (
         laps["IsCleanLap"].fillna(False)
         & laps["TyreAge"].notna()
