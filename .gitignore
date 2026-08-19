@@ -1,0 +1,11 @@
+# Reproducible environment + HTTP cache (~930MB combined)
+.venv/
+.fastf1_cache/
+__pycache__/
+*.pyc
+*.log
+
+# Race Parquet IS committed: it is only ~1.5MB for 45 races, and FastF1's
+# 500-calls/hour limit means regenerating it from scratch takes about an hour.
+# Keeping it in the repo makes a clone immediately runnable and lets the
+# deployment image bundle the data.

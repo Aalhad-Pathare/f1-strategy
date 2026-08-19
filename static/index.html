@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F1 Tyre Strategy</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#141922; --panel-2:#1b2230; --line:#252d3d;
+    --text:#e6ebf5; --dim:#8b97ad; --accent:#4da3ff;
+    --soft:#e8484b; --medium:#f2c14e; --hard:#e8ecf2; --inter:#4bbf5e; --wet:#3d8ef5;
+    --good:#3fd07f; --bad:#ff6b6b;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+  header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+    padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel)}
+  h1{font-size:15px;margin:0;letter-spacing:.02em;font-weight:600;white-space:nowrap}
+  select,button{background:var(--panel-2);color:var(--text);border:1px solid var(--line);
+    border-radius:8px;padding:7px 10px;font:inherit}
+  button{cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  .layout{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px;align-items:start}
+  @media (max-width:900px){.layout{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px;margin-bottom:16px}
+  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--dim);margin:0 0 10px;font-weight:600}
+  .lapbar{display:flex;gap:12px;align-items:center;padding:0 18px 14px;background:var(--panel);
+    border-bottom:1px solid var(--line)}
+  .lapbar input[type=range]{flex:1;accent-color:var(--accent)}
+  .lapnum{font-variant-numeric:tabular-nums;min-width:96px;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--dim);font-weight:600;padding:4px 6px;border-bottom:1px solid var(--line)}
+  td{padding:5px 6px;border-bottom:1px solid #1d2330}
+  tr.car{cursor:pointer}
+  tr.car:hover{background:var(--panel-2)}
+  tr.car.sel{background:#1e2a3d;outline:1px solid var(--accent)}
+  .cmp{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;
+    vertical-align:middle}
+  .cmp.SOFT{background:var(--soft)} .cmp.MEDIUM{background:var(--medium)}
+  .cmp.HARD{background:var(--hard)} .cmp.INTERMEDIATE{background:var(--inter)}
+  .cmp.WET{background:var(--wet)}
+  .action{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:2px 0 4px}
+  .action.PIT_NOW{color:var(--good)} .action.STAY_OUT{color:var(--accent)}
+  .action.NO_ADVICE{color:var(--dim)}
+  .reason{color:var(--dim);margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+  .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+  .stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+  .stat .v{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;
+    border:1px solid var(--line);background:var(--panel-2);color:var(--dim)}
+  .pill.low{color:var(--bad);border-color:#4a2630}
+  .pill.medium{color:var(--medium);border-color:#4a3f22}
+  .pill.high{color:var(--good);border-color:#22462f}
+  .pos{color:var(--good)} .neg{color:var(--bad)}
+  .muted{color:var(--dim)}
+  .empty{color:var(--dim);padding:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>F1 TYRE STRATEGY</h1>
+  <select id="race"></select>
+  <span id="raceMeta" class="muted"></span>
+  <button id="play">▶ Play</button>
+</header>
+<div class="lapbar">
+  <input type="range" id="lap" min="1" max="70" value="1">
+  <span class="lapnum" id="lapLabel">Lap 1 / 70</span>
+  <span id="modelPill" class="pill">model</span>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="card">
+      <h2>Running order</h2>
+      <table><thead><tr><th>P</th><th>Driver</th><th>Tyre</th><th>Age</th><th>Gap</th></tr></thead>
+      <tbody id="standings"></tbody></table>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>Recommendation — <span id="focusName">—</span></h2>
+      <div class="action" id="action">—</div>
+      <div class="reason" id="reason"></div>
+      <div class="grid" id="stats"></div>
+    </div>
+    <div class="card">
+      <h2>Candidate plans</h2>
+      <table><thead><tr><th>Pit lap</th><th>Compound</th><th>Δ vs best</th></tr></thead>
+      <tbody id="plans"></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Rival calls</h2>
+      <table><thead><tr><th>Driver</th><th>P</th><th>Gap</th><th>Move</th><th>Margin</th><th>H</th></tr></thead>
+      <tbody id="rivals"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let RACE = null, LAP = 1, FOCUS = null, TOTAL = 70, timer = null;
+
+const fmt = (v, d=2) => (v === null || v === undefined) ? '—' : (+v).toFixed(d);
+const signed = (v, d=2) => (v === null || v === undefined) ? '—'
+  : (v >= 0 ? '+' : '') + (+v).toFixed(d);
+const cls = v => v === null || v === undefined ? '' : (v >= 0 ? 'pos' : 'neg');
+
+async function get(url){ const r = await fetch(url); if(!r.ok) throw new Error(url); return r.json(); }
+
+async function boot(){
+  const races = await get('/api/races');
+  $('race').innerHTML = races.map(r =>
+    `<option value="${r.slug}">${r.year} · ${r.event}${r.is_wet ? ' (wet)' : ''}</option>`).join('');
+  $('race').onchange = () => loadRace($('race').value);
+  await loadRace(races[0].slug);
+}
+
+async function loadRace(slug){
+  RACE = await get('/api/races/' + slug);
+  TOTAL = RACE.total_laps;
+  FOCUS = null;
+  $('lap').max = TOTAL; $('lap').value = 1; LAP = 1;
+  $('raceMeta').textContent =
+    `${TOTAL} laps · pit loss ${fmt(RACE.pit_loss,1)}s` + (RACE.is_wet ? ' · wet/mixed' : '');
+  await refresh();
+}
+
+async function refresh(){
+  $('lapLabel').textContent = `Lap ${LAP} / ${TOTAL}`;
+  const st = await get(`/api/races/${RACE.slug}/lap/${LAP}`);
+
+  const m = st.model;
+  $('modelPill').className = 'pill ' + m.confidence;
+  $('modelPill').textContent =
+    `${m.confidence} confidence · fuel ${fmt(m.fuel_effect,3)}s/lap${m.fuel_pinned ? ' (pinned)' : ''} · ±${fmt(m.residual_std,2)}s`;
+
+  if (!FOCUS && st.cars.length) FOCUS = st.cars[0].driver;
+
+  $('standings').innerHTML = st.cars.map(c => `
+    <tr class="car ${c.driver === FOCUS ? 'sel' : ''}" data-d="${c.driver}">
+      <td>${c.position}</td>
+      <td><strong>${c.driver}</strong></td>
+      <td><span class="cmp ${c.compound}"></span>${(c.compound||'').slice(0,3)}</td>
+      <td>${fmt(c.tyre_age,0)}</td>
+      <td class="muted">${c.gap_ahead === null ? 'leader' : '+' + fmt(c.gap_ahead,1)}</td>
+    </tr>`).join('');
+  document.querySelectorAll('tr.car').forEach(tr =>
+    tr.onclick = () => { FOCUS = tr.dataset.d; refresh(); });
+
+  await loadFocus();
+}
+
+async function loadFocus(){
+  if (!FOCUS) return;
+  const r = await get(`/api/races/${RACE.slug}/lap/${LAP}/driver/${FOCUS}`);
+  const s = r.state;
+  $('focusName').textContent = `${FOCUS} · P${s.position} · ${s.team || ''}`;
+  $('action').className = 'action ' + r.action;
+  $('action').textContent = r.action.replace('_', ' ');
+  $('reason').textContent = r.reason;
+
+  $('stats').innerHTML = `
+    ${stat('Compound', (s.compound||'—').slice(0,3))}
+    ${stat('Tyre age', fmt(s.tyre_age,0) + ' laps')}
+    ${stat('Stint', s.stint)}
+    ${stat('Optimal pit', r.optimal_pit_lap === null ? 'none' : 'lap ' + r.optimal_pit_lap)}
+    ${stat('Target tyre', r.compound || '—')}
+    ${stat('Cost to pit now', signed(r.cost_of_pitting_now,1) + 's')}
+    ${stat('Gap ahead', s.gap_ahead === null ? 'leader' : '+' + fmt(s.gap_ahead,2) + 's')}
+    ${stat('Confidence', r.confidence)}`;
+
+  $('plans').innerHTML = r.plans.length ? r.plans.map(p => `
+    <tr><td>${p.pit_lap === null ? '<span class="muted">no stop</span>' : p.pit_lap}</td>
+        <td>${p.compound ? `<span class="cmp ${p.compound}"></span>${p.compound.slice(0,3)}` : '—'}</td>
+        <td>${p.delta_vs_best === 0 ? '<strong>best</strong>' : '+' + fmt(p.delta_vs_best,2) + 's'}</td></tr>`).join('')
+    : '<tr><td colspan="3" class="empty">No plans — engine declined to advise.</td></tr>';
+
+  $('rivals').innerHTML = r.rival_calls.length ? r.rival_calls.slice(0,10).map(c => `
+    <tr><td><strong>${c.rival}</strong></td><td>${c.position}</td>
+        <td class="${cls(-c.gap)}">${signed(c.gap,2)}</td>
+        <td>${c.kind}</td>
+        <td class="${cls(c.margin_s)}">${signed(c.margin_s,1)}s</td>
+        <td class="muted">${c.horizon}</td></tr>`).join('')
+    : '<tr><td colspan="6" class="empty">No rivals within striking distance.</td></tr>';
+}
+
+const stat = (k,v) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+
+$('lap').oninput = e => { LAP = +e.target.value; $('lapLabel').textContent = `Lap ${LAP} / ${TOTAL}`; };
+$('lap').onchange = refresh;
+$('play').onclick = () => {
+  if (timer){ clearInterval(timer); timer = null; $('play').textContent = '▶ Play'; return; }
+  $('play').textContent = '❚❚ Pause';
+  timer = setInterval(() => {
+    if (LAP >= TOTAL){ clearInterval(timer); timer = null; $('play').textContent = '▶ Play'; return; }
+    LAP++; $('lap').value = LAP; refresh();
+  }, 1200);
+};
+
+boot();
+</script>
+</body>
+</html>
