@@ -120,23 +120,27 @@ A FastF1 race load takes 1–2 minutes uncached and the upstream API rate-limits
 **500 calls/hour** (~11 calls per race). No user waits that long on a dropdown, so
 the API accepts a request, returns a job id, and a worker does the fetch.
 
-The local implementation is deliberately shaped like its cloud counterpart:
+This runs **locally only**. The queue, workers and rate limiter are real and
+working — `jobs.py` deduplicates on race slug, backs off and retries on upstream
+throttling, caps at three attempts, and resets a job to `queued` if the process
+dies mid-fetch. None of it is deployed.
 
-| Local | AWS |
+Download is switched off in the deployed build (`F1_INGEST=off`), because it needs
+writable storage and a long-lived worker and a read-only serverless function has
+neither. The UI detects the flag and says so rather than offering a button that
+cannot work.
+
+**Planned migration.** The local pieces were written against interfaces that map
+onto managed services, so moving them should swap implementations rather than
+reshape the API. Nothing in the right-hand column is built yet:
+
+| Built (local) | Planned (AWS) |
 |---|---|
 | SQLite `jobs` table | DynamoDB |
-| in-process queue | SQS + dead-letter queue |
+| in-process `queue.Queue` | SQS + dead-letter queue |
 | worker threads | Lambda consumers, reserved concurrency |
 | rate limiter (35/hour) | Step Functions Map with a concurrency cap |
-| `data/*.parquet` | S3 |
-
-Jobs deduplicate on race slug, back off and retry on upstream throttling, cap at
-three attempts, and reset to `queued` if the process dies mid-fetch.
-
-Download is switched off in the deployed build (`F1_INGEST=off`) — it needs
-writable storage and a long-lived worker, which a read-only serverless function
-has neither of. The UI detects this and says so rather than offering a button
-that cannot work.
+| `data/*.parquet` on disk | S3 |
 
 ---
 
