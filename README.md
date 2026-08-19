@@ -98,21 +98,77 @@ FastF1 ──▶ ingest ──▶ Parquet + catalog ──▶ pace model ──�
                                                     (fit on laps 1..N only)
 ```
 
-| File | Role |
-|---|---|
-| `ingestcore.py` | FastF1 session → normalised lap table |
-| `ingest.py` | Batch CLI over whole seasons |
-| `schedule.py` | Cached season schedules |
-| `jobs.py` | Async ingest queue, worker pool, rate limiting |
-| `dataio.py` | Storage boundary: load, repair, save, index |
-| `model.py` | Fuel-corrected degradation model |
-| `strategy.py` | Pit-window search, undercut/overcut analysis |
-| `api.py` | FastAPI service |
-| `lambda_app.py` | Lambda entrypoint (Mangum ASGI adapter) |
-| `static/index.html` | Front end |
-| `validate.py` | Out-of-sample model validation |
-| `backtest.py` | Recommendations vs. what teams actually did |
-| `deploy/` | preflight, deploy, teardown |
+### What actually runs on AWS
+
+The deployed system is small on purpose. Five services, each carrying real load:
+
+| Service | Resource | What it does |
+|---|---|---|
+| **Lambda** | `f1-strategy-api` | The whole application. Container image, x86_64, 1536MB, 30s timeout. Memory is set for CPU rather than RAM — Lambda scales vCPU with memory and importing pandas dominates cold start; warm requests use ~200MB. |
+| **ECR** | `f1-strategy-api` | Stores the image. Lifecycle policy expires untagged images after 14 days. |
+| **API Gateway** | `f1-strategy-http` (HTTP API) | Public HTTPS endpoint, proxies everything to Lambda. |
+| **IAM** | `f1-strategy-lambda-role` | Execution role. `AWSLambdaBasicExecutionRole` only — the read path touches no other service, so it needs nothing else. |
+| **CloudWatch Logs** | `/aws/lambda/f1-strategy-api` | Created by Lambda automatically; where the function's output goes. |
+
+Cold start ~0.33s, warm ~0.28s.
+
+**Also created, but not serving traffic:** a CloudFront distribution and Origin
+Access Control (`deploy/deploy-cdn.sh`), left over from working around the blocked
+Function URL described below. The distribution is **disabled**. It is kept because
+the script is a working reference for the OAC pattern, not because anything uses
+it. `deploy/teardown.sh` removes it.
+
+### What is not on AWS
+
+**No S3, DynamoDB, SQS, Step Functions, ECS, or Kafka.** The account has zero of
+each — verified, not assumed. Where this project needs the capability one of those
+would provide, it uses a local implementation instead:
+
+| Capability | What this project uses | Managed service it would map to |
+|---|---|---|
+| Race data storage | Parquet files, baked into the container image | S3 |
+| Race index / catalog | `data/catalog.json`, mtime-cached | DynamoDB |
+| Ingest job state | SQLite (`data/jobs.db`), local only | DynamoDB |
+| Ingest queue | `queue.Queue` in-process, local only | SQS + dead-letter queue |
+| Ingest workers | daemon threads, local only | Lambda consumers with reserved concurrency |
+| Upstream throttling | rate limiter, 35 races/hour | Step Functions Map with a concurrency cap |
+
+These are **working implementations, not mocks** — the queue really queues, the
+workers really fetch, the limiter really throttles, and the whole path was verified
+end to end by downloading a race that was not in the store. They are simply local:
+they run when you run the app on your own machine, and none of them are part of the
+deployed build, which serves a fixed dataset with ingest switched off.
+
+The interfaces were written so that swapping in the managed services changes
+implementations rather than the API. That is a design intention, not a completed
+migration.
+
+### Code layout
+
+"Deployed" marks what the container image contains — the read path only. The
+ingest and analysis tooling stays on your machine.
+
+| File | Role | Deployed |
+|---|---|:---:|
+| `api.py` | FastAPI service | ✅ |
+| `lambda_app.py` | Lambda entrypoint (Mangum ASGI adapter) | ✅ |
+| `model.py` | Fuel-corrected degradation model | ✅ |
+| `strategy.py` | Pit-window search, undercut/overcut analysis | ✅ |
+| `dataio.py` | Storage boundary: load, repair, save, index | ✅ |
+| `schedule.py` | Cached season schedules | ✅ |
+| `static/index.html` | Front end | ✅ |
+| `jobs.py` | Async ingest queue, worker pool, rate limiting | ⚠️ |
+| `ingestcore.py` | FastF1 session → normalised lap table | — |
+| `ingest.py` | Batch CLI over whole seasons | — |
+| `validate.py` | Out-of-sample model validation | — |
+| `backtest.py` | Recommendations vs. what teams actually did | — |
+| `backfill_colors.py` | One-off livery backfill | — |
+| `deploy/` | preflight, deploy, teardown scripts | — |
+
+⚠️ `jobs.py` ships because `api.py` imports it, but it is inert: `F1_INGEST=off`
+means no workers start and the ingest endpoints return 503. FastF1 itself is not
+in the image at all — it pulls matplotlib, scipy and cryptography that the read
+path never touches, so season schedules are pre-cached instead.
 
 ### On-demand ingest
 
@@ -130,17 +186,8 @@ writable storage and a long-lived worker and a read-only serverless function has
 neither. The UI detects the flag and says so rather than offering a button that
 cannot work.
 
-**Planned migration.** The local pieces were written against interfaces that map
-onto managed services, so moving them should swap implementations rather than
-reshape the API. Nothing in the right-hand column is built yet:
-
-| Built (local) | Planned (AWS) |
-|---|---|
-| SQLite `jobs` table | DynamoDB |
-| in-process `queue.Queue` | SQS + dead-letter queue |
-| worker threads | Lambda consumers, reserved concurrency |
-| rate limiter (35/hour) | Step Functions Map with a concurrency cap |
-| `data/*.parquet` on disk | S3 |
+See [What is not on AWS](#what-is-not-on-aws) for how each local piece maps onto
+the managed service it would become.
 
 ---
 
