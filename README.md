@@ -167,10 +167,7 @@ ingest and analysis tooling stays on your machine.
 | `backfill_colors.py` | One-off livery backfill | — |
 | `deploy/` | preflight, deploy, teardown scripts | — |
 
-⚠️ `jobs.py` ships because `api.py` imports it, but it is inert: `F1_INGEST=off`
-means no workers start and the ingest endpoints return 503. FastF1 itself is not
-in the image at all — it pulls matplotlib, scipy and cryptography that the read
-path never touches, so season schedules are pre-cached instead.
+
 
 ### On-demand ingest
 
