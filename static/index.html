@@ -4,126 +4,249 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F1 Tyre Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0e14; --panel:#141922; --panel-2:#1b2230; --line:#252d3d;
-    --text:#e6ebf5; --dim:#8b97ad; --accent:#4da3ff;
-    --soft:#e8484b; --medium:#f2c14e; --hard:#e8ecf2; --inter:#4bbf5e; --wet:#3d8ef5;
-    --good:#3fd07f; --bad:#ff6b6b;
-    --radius:12px;
+    /* Formula 1 brand palette */
+    --f1-red:#E10600;
+    --f1-black:#15151E;
+    --bg:#F7F4F1;          /* F1 warm off-white */
+    --panel:#FFFFFF;
+    --panel-2:#F2EEEB;
+    --line:#E2DDD8;
+    --line-strong:#CFC8C1;
+    --text:#15151E;
+    --dim:#6E6A67;
+    --good:#00A34A;
+    --bad:#D50000;
+    --warn:#C77700;
+    --radius:6px;
+    --shadow:0 1px 2px rgba(21,21,30,.06), 0 4px 14px rgba(21,21,30,.05);
+    --maxw:1360px;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);
-    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-  header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;
-    padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel)}
-  h1{font-size:15px;margin:0;letter-spacing:.02em;font-weight:600;white-space:nowrap}
-  select,button{background:var(--panel-2);color:var(--text);border:1px solid var(--line);
-    border-radius:8px;padding:7px 10px;font:inherit}
-  button{cursor:pointer}
-  button:hover{border-color:var(--accent)}
-  .layout{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px;align-items:start}
-  @media (max-width:900px){.layout{grid-template-columns:1fr}}
+  html,body{margin:0;background:var(--bg);color:var(--text)}
+  body{font-family:"Titillium Web",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:14px;line-height:1.5}
+
+  /* ---------- header ---------- */
+  .topbar{background:var(--f1-black);color:#fff}
+  .topbar .inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;gap:14px}
+  .mark{display:flex;align-items:center;gap:10px}
+  .mark .bars{display:flex;gap:2px}
+  .mark .bars i{display:block;width:4px;height:18px;background:var(--f1-red);
+    transform:skewX(-15deg)}
+  .mark .bars i:nth-child(2){height:14px;opacity:.8}
+  .mark .bars i:nth-child(3){height:10px;opacity:.55}
+  h1{font-size:15px;margin:0;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+    white-space:nowrap}
+
+  .controls{background:var(--panel);border-bottom:1px solid var(--line)}
+  .controls .inner{max-width:var(--maxw);margin:0 auto;padding:12px 24px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select,button{font:inherit;font-weight:600;color:var(--text);background:var(--panel-2);
+    border:1px solid var(--line-strong);border-radius:var(--radius);padding:7px 11px}
+  select{max-width:340px}
+  button{cursor:pointer;transition:background .12s,border-color .12s,color .12s}
+  button:hover:not(:disabled){border-color:var(--f1-red);color:var(--f1-red)}
+  button.primary{background:var(--f1-red);border-color:var(--f1-red);color:#fff}
+  button.primary:hover{background:#c00500;border-color:#c00500;color:#fff}
+  .spacer{flex:1}
+
+  /* ---------- lap scrubber ---------- */
+  .lapbar{background:var(--panel);border-bottom:1px solid var(--line)}
+  .lapbar .inner{max-width:var(--maxw);margin:0 auto;padding:10px 24px;
+    display:flex;align-items:center;gap:14px}
+  input[type=range]{flex:1;accent-color:var(--f1-red);height:4px}
+  .lapnum{font-variant-numeric:tabular-nums;font-weight:700;min-width:104px;font-size:13px}
+
+  /* ---------- fetch bar ---------- */
+  .fetchbar{background:#FFF6E6;border-bottom:1px solid #F0DFBC;color:#6B4E00}
+  .fetchbar.err{background:#FDECEC;border-bottom-color:#F5C6C6;color:#96110F}
+  .fetchbar .inner{max-width:var(--maxw);margin:0 auto;padding:11px 24px;
+    display:flex;align-items:center;gap:10px;font-weight:600;font-size:13px}
+  .spin{width:12px;height:12px;border-radius:50%;flex:0 0 auto;
+    border:2px solid rgba(0,0,0,.15);border-top-color:var(--f1-red);
+    animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  /* ---------- layout ---------- */
+  main{max-width:var(--maxw);margin:0 auto;padding:24px}
+  .layout{display:grid;grid-template-columns:minmax(320px,380px) 1fr;gap:24px;align-items:start}
+  @media (max-width:980px){.layout{grid-template-columns:1fr}}
+
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-    padding:14px;margin-bottom:16px}
-  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;
-    color:var(--dim);margin:0 0 10px;font-weight:600}
-  .lapbar{display:flex;gap:12px;align-items:center;padding:0 18px 14px;background:var(--panel);
-    border-bottom:1px solid var(--line)}
-  .lapbar input[type=range]{flex:1;accent-color:var(--accent)}
-  .lapnum{font-variant-numeric:tabular-nums;min-width:96px;color:var(--dim)}
+    box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden}
+  .card > h2{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);
+    margin:0;padding:13px 18px;border-bottom:1px solid var(--line);font-weight:700}
+  .card .body{padding:18px}
+  .card table{margin:0}
+
+  /* ---------- tables ---------- */
   table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
-    color:var(--dim);font-weight:600;padding:4px 6px;border-bottom:1px solid var(--line)}
-  td{padding:5px 6px;border-bottom:1px solid #1d2330}
+  th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--dim);font-weight:700;padding:9px 10px;background:var(--panel-2);
+    border-bottom:1px solid var(--line)}
+  td{padding:8px 10px;border-bottom:1px solid var(--line)}
+  tbody tr:last-child td{border-bottom:none}
   tr.car{cursor:pointer}
   tr.car:hover{background:var(--panel-2)}
-  tr.car.sel{background:#1e2a3d;outline:1px solid var(--accent)}
-  .cmp{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;
-    vertical-align:middle}
-  .cmp.SOFT{background:var(--soft)} .cmp.MEDIUM{background:var(--medium)}
-  .cmp.HARD{background:var(--hard)} .cmp.INTERMEDIATE{background:var(--inter)}
-  .cmp.WET{background:var(--wet)}
-  .action{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:2px 0 4px}
-  .action.PIT_NOW{color:var(--good)} .action.STAY_OUT{color:var(--accent)}
+  tr.car.sel{background:#FFF0EF}
+  tr.car td:first-child{position:relative;padding-left:14px;font-weight:700}
+  /* Team livery stripe, coloured per car from the season's official palette. */
+  tr.car td:first-child::before{content:"";position:absolute;left:0;top:0;bottom:0;
+    width:4px;background:var(--team,#B9B4AF)}
+  tr.car.sel td:first-child::before{width:5px}
+  .drv{font-weight:700;letter-spacing:.02em}
+  .team{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;
+    background:var(--team,#B9B4AF);vertical-align:-1px}
+
+  /* ---------- compound chips ---------- */
+  .cmp{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12px}
+  .cmp b{width:15px;height:15px;border-radius:50%;display:inline-block;
+    border:2px solid var(--cmp,#ccc);background:transparent}
+  .cmp b.fill{background:var(--cmp)}
+
+  /* ---------- recommendation ---------- */
+  .rec{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}
+  .action{font-size:34px;font-weight:900;letter-spacing:-.02em;line-height:1.05;
+    text-transform:uppercase}
+  .action.PIT_NOW{color:var(--f1-red)}
+  .action.STAY_OUT{color:var(--f1-black)}
   .action.NO_ADVICE{color:var(--dim)}
-  .reason{color:var(--dim);margin-bottom:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
-  .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
-  .stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
-  .stat .v{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
-  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;
-    border:1px solid var(--line);background:var(--panel-2);color:var(--dim)}
-  .pill.low{color:var(--bad);border-color:#4a2630}
-  .pill.medium{color:var(--medium);border-color:#4a3f22}
-  .pill.high{color:var(--good);border-color:#22462f}
-  .pos{color:var(--good)} .neg{color:var(--bad)}
+  .reason{color:var(--dim);margin:6px 0 0;font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;
+    margin-top:18px}
+  .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:10px 12px}
+  .stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);
+    font-weight:700}
+  .stat .v{font-size:18px;font-weight:700;margin-top:1px}
+
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    border:1px solid var(--line-strong);background:var(--panel-2);color:var(--dim)}
+  .pill.low{color:var(--bad);border-color:#F0C4C4;background:#FDECEC}
+  .pill.medium{color:var(--warn);border-color:#F0DFBC;background:#FFF6E6}
+  .pill.high{color:var(--good);border-color:#BFE5CE;background:#EBF8F0}
+  .pos{color:var(--good);font-weight:700} .neg{color:var(--bad);font-weight:700}
   .muted{color:var(--dim)}
-  .empty{color:var(--dim);padding:8px 0}
-  .fetchbar{padding:10px 18px;background:#1d2536;border-bottom:1px solid var(--line);
-    color:var(--text);font-size:13px}
-  .fetchbar.err{background:#2e1a20;color:var(--bad)}
-  .spin{display:inline-block;width:11px;height:11px;margin-right:8px;border-radius:50%;
-    border:2px solid #3a465c;border-top-color:var(--accent);animation:sp .8s linear infinite;
-    vertical-align:-1px}
-  @keyframes sp{to{transform:rotate(360deg)}}
-  option:disabled{color:#5a6478}
+  .empty{color:var(--dim);padding:14px 18px;font-size:13px}
+  .kind{font-weight:700;font-size:12px;text-transform:capitalize}
+  .kind.undercut,.kind.overcut{color:var(--f1-red)}
+  .kind.safe{color:var(--good)} .kind.exposed{color:var(--bad)}
 </style>
 </head>
 <body>
-<header>
-  <h1>F1 TYRE STRATEGY</h1>
-  <select id="year"></select>
-  <select id="race"></select>
-  <button id="fetch" hidden>⬇ Fetch data</button>
+
+<div class="topbar"><div class="inner">
+  <div class="mark"><div class="bars"><i></i><i></i><i></i></div><h1>F1 Tyre Strategy</h1></div>
+  <div class="spacer"></div>
+  <span id="rate" class="pill" style="background:#2a2a33;border-color:#3a3a45;color:#B9B4AF"></span>
+</div></div>
+
+<div class="controls"><div class="inner">
+  <select id="year" aria-label="Season"></select>
+  <select id="race" aria-label="Race"></select>
+  <button id="fetch" class="primary" hidden>Fetch data</button>
   <span id="raceMeta" class="muted"></span>
-  <span id="rate" class="pill" title="Upstream ingest budget"></span>
+  <div class="spacer"></div>
   <button id="play">▶ Play</button>
-</header>
-<div id="fetchBar" class="fetchbar" hidden><span id="fetchMsg"></span></div>
-<div class="lapbar">
-  <input type="range" id="lap" min="1" max="70" value="1">
+</div></div>
+
+<div id="fetchBar" class="fetchbar" hidden><div class="inner">
+  <span id="fetchSpin" class="spin" hidden></span><span id="fetchMsg"></span>
+</div></div>
+
+<div class="lapbar"><div class="inner">
+  <input type="range" id="lap" min="1" max="70" value="1" aria-label="Lap">
   <span class="lapnum" id="lapLabel">Lap 1 / 70</span>
   <span id="modelPill" class="pill">model</span>
-</div>
+</div></div>
 
-<div class="layout">
-  <div>
-    <div class="card">
-      <h2>Running order</h2>
-      <table><thead><tr><th>P</th><th>Driver</th><th>Tyre</th><th>Age</th><th>Gap</th></tr></thead>
-      <tbody id="standings"></tbody></table>
+<main>
+  <div class="layout">
+    <div>
+      <div class="card">
+        <h2>Running order</h2>
+        <table>
+          <thead><tr><th>P</th><th>Driver</th><th>Tyre</th><th>Age</th><th>Gap</th></tr></thead>
+          <tbody id="standings"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2>Recommendation — <span id="focusName">—</span></h2>
+        <div class="body">
+          <div class="rec">
+            <div>
+              <div class="action" id="action">—</div>
+              <div class="reason" id="reason"></div>
+            </div>
+          </div>
+          <div class="grid" id="stats"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Candidate plans</h2>
+        <table>
+          <thead><tr><th>Pit lap</th><th>Compound</th><th>Δ vs best</th></tr></thead>
+          <tbody id="plans"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Rival calls</h2>
+        <table>
+          <thead><tr><th>Driver</th><th>P</th><th>Gap</th><th>Move</th><th>Margin</th><th>Laps</th></tr></thead>
+          <tbody id="rivals"></tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-  <div>
-    <div class="card">
-      <h2>Recommendation — <span id="focusName">—</span></h2>
-      <div class="action" id="action">—</div>
-      <div class="reason" id="reason"></div>
-      <div class="grid" id="stats"></div>
-    </div>
-    <div class="card">
-      <h2>Candidate plans</h2>
-      <table><thead><tr><th>Pit lap</th><th>Compound</th><th>Δ vs best</th></tr></thead>
-      <tbody id="plans"></tbody></table>
-    </div>
-    <div class="card">
-      <h2>Rival calls</h2>
-      <table><thead><tr><th>Driver</th><th>P</th><th>Gap</th><th>Move</th><th>Margin</th><th>H</th></tr></thead>
-      <tbody id="rivals"></tbody></table>
-    </div>
-  </div>
-</div>
+</main>
 
 <script>
 const $ = id => document.getElementById(id);
 let RACE = null, LAP = 1, FOCUS = null, TOTAL = 70, timer = null;
+let ROUNDS = [], YEAR = null, POLL = null;
 
-const fmt = (v, d=2) => (v === null || v === undefined) ? '—' : (+v).toFixed(d);
-const signed = (v, d=2) => (v === null || v === undefined) ? '—'
-  : (v >= 0 ? '+' : '') + (+v).toFixed(d);
-const cls = v => v === null || v === undefined ? '' : (v >= 0 ? 'pos' : 'neg');
+// Fallbacks only: real values come from the season's official palette via the API.
+const CMP_FALLBACK = {SOFT:'#DA291C', MEDIUM:'#FFD12E', HARD:'#BFBFB8',
+                      INTERMEDIATE:'#43B02A', WET:'#0067AD'};
+const TEAM_FALLBACK = '#B9B4AF';
+
+const fmt = (v,d=2) => (v===null||v===undefined) ? '—' : (+v).toFixed(d);
+const signed = (v,d=2) => (v===null||v===undefined) ? '—' : (v>=0?'+':'')+(+v).toFixed(d);
+const cls = v => (v===null||v===undefined) ? '' : (v>=0 ? 'pos' : 'neg');
+// Official palettes are built for dark broadcast graphics, so the pale ones
+// (HARD is #f0f0ec, Haas is #b6babd) vanish against a light background. Darken
+// anything above a luminance threshold rather than dropping the real colour.
+function readable(hex){
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return hex;
+  const n = parseInt(m[1],16);
+  let r = (n>>16)&255, g = (n>>8)&255, b = n&255;
+  const lum = (0.2126*r + 0.7152*g + 0.0722*b) / 255;
+  if (lum <= 0.72) return '#'+m[1];
+  const k = 0.72 / lum;                       // scale down to the threshold
+  const c = v => Math.max(0, Math.min(255, Math.round(v*k)));
+  return '#' + [c(r),c(g),c(b)].map(v => v.toString(16).padStart(2,'0')).join('');
+}
+const teamColor = d => readable((RACE?.colors?.drivers?.[d]) || TEAM_FALLBACK);
+const cmpColor = c => readable((RACE?.colors?.compounds?.[c]) || CMP_FALLBACK[c] || '#B9B4AF');
+
+// HARD is near-white, so it reads as an outline chip on a light background.
+const cmpChip = c => {
+  if (!c) return '—';
+  const fill = c === 'HARD' ? '' : ' fill';
+  return `<span class="cmp" style="--cmp:${cmpColor(c)}"><b class="${fill.trim()}"></b>${c.slice(0,3)}</span>`;
+};
 
 async function get(url){
   const r = await fetch(url);
@@ -132,20 +255,14 @@ async function get(url){
 }
 async function post(url){
   const r = await fetch(url, {method:'POST'});
-  if(!r.ok){
-    let d = {}; try { d = await r.json(); } catch(e){}
-    throw new Error(d.detail || `${r.status}`);
-  }
+  if(!r.ok){ let d={}; try{ d = await r.json(); }catch(e){} throw new Error(d.detail || `${r.status}`); }
   return r.json();
 }
-
-let ROUNDS = [], YEAR = null, POLL = null;
 
 async function boot(){
   const seasons = await get('/api/seasons');
   $('year').innerHTML = seasons.map(s =>
-    `<option value="${s.year}">${s.year}${s.ingested ? ` (${s.ingested})` : ''}</option>`).join('');
-  // Default to the season with the most data already available.
+    `<option value="${s.year}">${s.year}${s.ingested ? ` · ${s.ingested} races` : ''}</option>`).join('');
   const best = seasons.slice().sort((a,b) => b.ingested - a.ingested)[0];
   $('year').value = best.year;
   $('year').onchange = () => loadSeason(+$('year').value);
@@ -155,33 +272,27 @@ async function boot(){
 }
 
 async function loadSeason(year){
-  YEAR = year;
-  stopPoll();
+  YEAR = year; stopPoll();
   let d;
   try { d = await get('/api/seasons/' + year); }
-  catch(e){ showFetch('Could not load the ' + year + ' schedule.', true); return; }
+  catch(e){ showFetch(`Could not load the ${year} schedule.`, true); return; }
   ROUNDS = d.rounds;
   showRate(d.rate);
 
   $('race').innerHTML = ROUNDS.map(r => {
-    const mark = r.ready ? '✓ ' : (r.job ? '⋯ ' : (r.is_past ? '· ' : ''));
-    const suffix = r.ready ? (r.is_wet ? ' (wet)' : '')
-                 : (r.is_past ? ' — not fetched' : ' — not run yet');
-    return `<option value="${r.slug}" data-round="${r.round}" ${r.is_past ? '' : 'disabled'}>`
-         + `${mark}R${r.round} · ${r.event}${suffix}</option>`;
+    const mark = r.ready ? '✓ ' : (r.job ? '⋯ ' : '');
+    const suffix = r.ready ? (r.is_wet ? '  (wet)' : '')
+                 : (r.is_past ? '  — not downloaded' : '  — not run yet');
+    return `<option value="${r.slug}" ${r.is_past?'':'disabled'}>${mark}R${r.round} · ${r.event}${suffix}</option>`;
   }).join('');
 
-  // Prefer a race whose data is already present.
   const first = ROUNDS.find(r => r.ready) || ROUNDS.find(r => r.is_past);
-  if (!first){ showFetch('No races have been run in ' + year + ' yet.', false); clearRace(); return; }
+  if (!first){ showFetch(`No races have been run in ${year} yet.`, false); clearRace(); return; }
   $('race').value = first.slug;
   await onPickRace();
 }
 
-function currentRound(){
-  const slug = $('race').value;
-  return ROUNDS.find(r => r.slug === slug) || null;
-}
+const currentRound = () => ROUNDS.find(r => r.slug === $('race').value) || null;
 
 async function onPickRace(){
   stopPoll();
@@ -191,97 +302,73 @@ async function onPickRace(){
   clearRace();
   if (!r.is_past){ $('fetch').hidden = true; showFetch(`${r.event} has not been run yet.`, false); return; }
   $('fetch').hidden = false;
-  if (r.job){ showFetch(`Fetching ${r.event}…`, false, true); pollJob(r.job.id); }
-  else showFetch(`${r.event} is not downloaded yet. Fetching takes 1–2 minutes.`, false);
+  if (r.job){ showFetch(`Downloading ${r.event}…`, false, true); pollJob(r.job.id); }
+  else showFetch(`${r.event} is not downloaded yet — fetching takes up to a minute or two.`, false);
 }
 
 async function startFetch(){
-  const r = currentRound();
-  if (!r) return;
+  const r = currentRound(); if (!r) return;
   $('fetch').hidden = true;
   showFetch(`Requesting ${r.event}…`, false, true);
   let j;
   try { j = await post(`/api/ingest?year=${YEAR}&round=${r.round}`); }
-  catch(e){ showFetch('Could not queue the download. ' + e.message, true); $('fetch').hidden = false; return; }
+  catch(e){ showFetch(`Could not queue the download. ${e.message}`, true); $('fetch').hidden = false; return; }
   if (j.state === 'done' || j.already_present){ await afterFetch(r); return; }
-  showFetch(`Fetching ${r.event}… queued`, false, true);
+  showFetch(`Downloading ${r.event}… queued`, false, true);
   pollJob(j.id);
 }
 
 function pollJob(id){
   stopPoll();
   POLL = setInterval(async () => {
-    let s;
-    try { s = await get('/api/jobs/' + id); } catch(e){ return; }
+    let s; try { s = await get('/api/jobs/' + id); } catch(e){ return; }
     const r = currentRound();
-    if (s.state === 'done' || s.ready){
-      stopPoll();
-      await afterFetch(r);
-    } else if (s.state === 'failed'){
-      stopPoll();
-      showFetch(`Download failed: ${s.error || 'unknown error'}`, true);
+    if (s.state === 'done' || s.ready){ stopPoll(); await afterFetch(r); }
+    else if (s.state === 'failed'){
+      stopPoll(); showFetch(`Download failed: ${s.error || 'unknown error'}`, true);
       $('fetch').hidden = false;
     } else {
-      showFetch(`Fetching ${r ? r.event : ''}… ${s.state} (${Math.round(s.age_s)}s)`, false, true);
+      showFetch(`Downloading ${r ? r.event : ''}… ${s.state} (${Math.round(s.age_s)}s)`, false, true);
     }
   }, 3000);
 }
-
-function stopPoll(){ if (POLL){ clearInterval(POLL); POLL = null; } }
+const stopPoll = () => { if (POLL){ clearInterval(POLL); POLL = null; } };
 
 async function afterFetch(r){
-  hideFetch();
-  $('fetch').hidden = true;
-  await loadSeason(YEAR);          // refresh availability marks and rate budget
+  hideFetch(); $('fetch').hidden = true;
+  await loadSeason(YEAR);
   if (r){ $('race').value = r.slug; await onPickRace(); }
-}
-
-const showFetch = (msg, isErr, spin=false) => {
-  $('fetchBar').hidden = false;
-  $('fetchBar').className = 'fetchbar' + (isErr ? ' err' : '');
-  $('fetchMsg').innerHTML = (spin ? '<span class="spin"></span>' : '') + msg;
-};
-const hideFetch = () => { $('fetchBar').hidden = true; };
-const showRate = rate => {
-  $('rate').textContent = `ingest ${rate.remaining}/${rate.limit} left this hour`;
-};
-function clearRace(){
-  $('standings').innerHTML = '<tr><td colspan="5" class="empty">No data loaded.</td></tr>';
-  $('plans').innerHTML = ''; $('rivals').innerHTML = '';
-  $('action').textContent = '—'; $('action').className = 'action';
-  $('reason').textContent = ''; $('stats').innerHTML = '';
-  $('focusName').textContent = '—'; $('raceMeta').textContent = '';
 }
 
 async function loadRace(slug){
   RACE = await get('/api/races/' + slug);
   stopPoll();
-  TOTAL = RACE.total_laps;
-  FOCUS = null;
+  TOTAL = RACE.total_laps; FOCUS = null;
   $('lap').max = TOTAL; $('lap').value = 1; LAP = 1;
-  $('raceMeta').textContent =
-    `${TOTAL} laps · pit loss ${fmt(RACE.pit_loss,1)}s` + (RACE.is_wet ? ' · wet/mixed' : '');
+  $('raceMeta').textContent = `${TOTAL} laps · pit loss ${fmt(RACE.pit_loss,1)}s`
+    + (RACE.is_wet ? ' · wet/mixed' : '');
   await refresh();
 }
 
 async function refresh(){
+  if (!RACE) return;
   $('lapLabel').textContent = `Lap ${LAP} / ${TOTAL}`;
   const st = await get(`/api/races/${RACE.slug}/lap/${LAP}`);
-
   const m = st.model;
   $('modelPill').className = 'pill ' + m.confidence;
-  $('modelPill').textContent =
-    `${m.confidence} confidence · fuel ${fmt(m.fuel_effect,3)}s/lap${m.fuel_pinned ? ' (pinned)' : ''} · ±${fmt(m.residual_std,2)}s`;
+  $('modelPill').textContent = `${m.confidence} confidence · fuel ${fmt(m.fuel_effect,3)}s/lap`
+    + `${m.fuel_pinned ? ' (pinned)' : ''} · ±${fmt(m.residual_std,2)}s`;
 
   if (!FOCUS && st.cars.length) FOCUS = st.cars[0].driver;
 
   $('standings').innerHTML = st.cars.map(c => `
-    <tr class="car ${c.driver === FOCUS ? 'sel' : ''}" data-d="${c.driver}">
+    <tr class="car ${c.driver===FOCUS?'sel':''}" data-d="${c.driver}"
+        style="--team:${teamColor(c.driver)}">
       <td>${c.position}</td>
-      <td><strong>${c.driver}</strong></td>
-      <td><span class="cmp ${c.compound}"></span>${(c.compound||'').slice(0,3)}</td>
+      <td><span class="team"></span><span class="drv">${c.driver}</span></td>
+      <td>${cmpChip(c.compound)}</td>
       <td>${fmt(c.tyre_age,0)}</td>
-      <td class="muted">${c.gap_ahead === null ? 'leader' : '+' + fmt(c.gap_ahead,1)}</td>
+      <td class="muted">${c.gap_ahead===null ? 'leader' : '+'+fmt(c.gap_ahead,1)}</td>
     </tr>`).join('');
   document.querySelectorAll('tr.car').forEach(tr =>
     tr.onclick = () => { FOCUS = tr.dataset.d; refresh(); });
@@ -290,48 +377,72 @@ async function refresh(){
 }
 
 async function loadFocus(){
-  if (!FOCUS) return;
+  if (!FOCUS || !RACE) return;
   const r = await get(`/api/races/${RACE.slug}/lap/${LAP}/driver/${FOCUS}`);
   const s = r.state;
-  $('focusName').textContent = `${FOCUS} · P${s.position} · ${s.team || ''}`;
+  $('focusName').innerHTML =
+    `<span style="color:${teamColor(FOCUS)}">■</span> ${FOCUS} · P${s.position}`
+    + (s.team ? ` · ${s.team}` : '');
   $('action').className = 'action ' + r.action;
-  $('action').textContent = r.action.replace('_', ' ');
+  $('action').textContent = r.action.replace('_',' ');
   $('reason').textContent = r.reason;
 
   $('stats').innerHTML = `
-    ${stat('Compound', (s.compound||'—').slice(0,3))}
+    ${stat('Compound', cmpChip(s.compound))}
     ${stat('Tyre age', fmt(s.tyre_age,0) + ' laps')}
     ${stat('Stint', s.stint)}
-    ${stat('Optimal pit', r.optimal_pit_lap === null ? 'none' : 'lap ' + r.optimal_pit_lap)}
-    ${stat('Target tyre', r.compound || '—')}
-    ${stat('Cost to pit now', signed(r.cost_of_pitting_now,1) + 's')}
-    ${stat('Gap ahead', s.gap_ahead === null ? 'leader' : '+' + fmt(s.gap_ahead,2) + 's')}
-    ${stat('Confidence', r.confidence)}`;
+    ${stat('Optimal pit', r.optimal_pit_lap===null ? 'none' : 'lap '+r.optimal_pit_lap)}
+    ${stat('Target tyre', r.compound ? cmpChip(r.compound) : '—')}
+    ${stat('Cost to pit now', signed(r.cost_of_pitting_now,1)+'s')}
+    ${stat('Gap ahead', s.gap_ahead===null ? 'leader' : '+'+fmt(s.gap_ahead,2)+'s')}
+    ${stat('Confidence', `<span class="pill ${r.confidence}">${r.confidence}</span>`)}`;
 
   $('plans').innerHTML = r.plans.length ? r.plans.map(p => `
-    <tr><td>${p.pit_lap === null ? '<span class="muted">no stop</span>' : p.pit_lap}</td>
-        <td>${p.compound ? `<span class="cmp ${p.compound}"></span>${p.compound.slice(0,3)}` : '—'}</td>
-        <td>${p.delta_vs_best === 0 ? '<strong>best</strong>' : '+' + fmt(p.delta_vs_best,2) + 's'}</td></tr>`).join('')
-    : '<tr><td colspan="3" class="empty">No plans — engine declined to advise.</td></tr>';
+    <tr><td><strong>${p.pit_lap===null ? '<span class="muted">no stop</span>' : 'Lap '+p.pit_lap}</strong></td>
+        <td>${cmpChip(p.compound)}</td>
+        <td>${p.delta_vs_best===0 ? '<strong style="color:var(--f1-red)">best</strong>'
+                                  : '+'+fmt(p.delta_vs_best,2)+'s'}</td></tr>`).join('')
+    : '<tr><td colspan="3" class="empty">No plans — the engine declined to advise.</td></tr>';
 
   $('rivals').innerHTML = r.rival_calls.length ? r.rival_calls.slice(0,10).map(c => `
-    <tr><td><strong>${c.rival}</strong></td><td>${c.position}</td>
-        <td class="${cls(-c.gap)}">${signed(c.gap,2)}</td>
-        <td>${c.kind}</td>
-        <td class="${cls(c.margin_s)}">${signed(c.margin_s,1)}s</td>
-        <td class="muted">${c.horizon}</td></tr>`).join('')
+    <tr style="--team:${teamColor(c.rival)}">
+      <td><span class="team"></span><span class="drv">${c.rival}</span></td>
+      <td>${c.position}</td>
+      <td class="${cls(-c.gap)}">${signed(c.gap,2)}</td>
+      <td><span class="kind ${c.kind}">${c.kind}</span></td>
+      <td class="${cls(c.margin_s)}">${signed(c.margin_s,1)}s</td>
+      <td class="muted">${c.horizon}</td></tr>`).join('')
     : '<tr><td colspan="6" class="empty">No rivals within striking distance.</td></tr>';
 }
 
 const stat = (k,v) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`;
 
+const showFetch = (msg,isErr,spin=false) => {
+  $('fetchBar').hidden = false;
+  $('fetchBar').className = 'fetchbar' + (isErr ? ' err' : '');
+  $('fetchSpin').hidden = !spin;
+  $('fetchMsg').textContent = msg;
+};
+const hideFetch = () => { $('fetchBar').hidden = true; };
+const showRate = rate => { $('rate').textContent = `${rate.remaining}/${rate.limit} downloads left this hour`; };
+
+function clearRace(){
+  RACE = null;
+  $('standings').innerHTML = '<tr><td colspan="5" class="empty">No data loaded.</td></tr>';
+  $('plans').innerHTML = ''; $('rivals').innerHTML = '';
+  $('action').textContent = '—'; $('action').className = 'action';
+  $('reason').textContent = ''; $('stats').innerHTML = '';
+  $('focusName').textContent = '—'; $('raceMeta').textContent = '';
+}
+
 $('lap').oninput = e => { LAP = +e.target.value; $('lapLabel').textContent = `Lap ${LAP} / ${TOTAL}`; };
 $('lap').onchange = refresh;
 $('play').onclick = () => {
   if (timer){ clearInterval(timer); timer = null; $('play').textContent = '▶ Play'; return; }
+  if (!RACE) return;
   $('play').textContent = '❚❚ Pause';
   timer = setInterval(() => {
-    if (LAP >= TOTAL){ clearInterval(timer); timer = null; $('play').textContent = '▶ Play'; return; }
+    if (LAP >= TOTAL){ clearInterval(timer); timer=null; $('play').textContent='▶ Play'; return; }
     LAP++; $('lap').value = LAP; refresh();
   }, 1200);
 };

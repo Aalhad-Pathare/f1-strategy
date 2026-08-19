@@ -114,7 +114,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "LEC": "#e8002d",
+    "RUS": "#27f4d2",
+    "PER": "#0600ef",
+    "SAI": "#e8002d",
+    "ALO": "#00665f",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "HAM": "#27f4d2",
+    "TSU": "#364aa9",
+    "ALB": "#00a0dd",
+    "MAG": "#b6babd",
+    "ZHO": "#00e700",
+    "RIC": "#364aa9",
+    "SAR": "#00a0dd",
+    "OCO": "#ff87bc",
+    "GAS": "#ff87bc",
+    "BOT": "#00e700",
+    "STR": "#00665f",
+    "HUL": "#b6babd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_saudi-arabian",
@@ -232,7 +277,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "LEC": "#e8002d",
+    "PER": "#0600ef",
+    "ALO": "#00665f",
+    "PIA": "#ff8000",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "HAM": "#27f4d2",
+    "STR": "#00665f",
+    "TSU": "#364aa9",
+    "BEA": "#e8002d",
+    "MAG": "#b6babd",
+    "ALB": "#00a0dd",
+    "HUL": "#b6babd",
+    "RIC": "#364aa9",
+    "OCO": "#ff87bc",
+    "BOT": "#00e700",
+    "SAR": "#00a0dd",
+    "ZHO": "#00e700",
+    "GAS": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_australian",
@@ -345,7 +435,51 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "SAI": "#e8002d",
+    "NOR": "#ff8000",
+    "LEC": "#e8002d",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "PER": "#0600ef",
+    "STR": "#00665f",
+    "TSU": "#364aa9",
+    "HAM": "#27f4d2",
+    "ALO": "#00665f",
+    "BOT": "#00e700",
+    "MAG": "#b6babd",
+    "ALB": "#00a0dd",
+    "OCO": "#ff87bc",
+    "HUL": "#b6babd",
+    "GAS": "#ff87bc",
+    "RIC": "#364aa9",
+    "ZHO": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_japanese",
@@ -463,7 +597,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "PER": "#0600ef",
+    "NOR": "#ff8000",
+    "SAI": "#e8002d",
+    "ALO": "#00665f",
+    "PIA": "#ff8000",
+    "HAM": "#27f4d2",
+    "LEC": "#e8002d",
+    "RUS": "#27f4d2",
+    "HUL": "#b6babd",
+    "BOT": "#00e700",
+    "TSU": "#364aa9",
+    "OCO": "#ff87bc",
+    "GAS": "#ff87bc",
+    "STR": "#00665f",
+    "MAG": "#b6babd",
+    "SAR": "#00a0dd",
+    "ZHO": "#00e700",
+    "RIC": "#364aa9",
+    "ALB": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_chinese",
@@ -581,7 +760,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "ALO": "#00665f",
+    "PER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "LEC": "#e8002d",
+    "HUL": "#b6babd",
+    "SAI": "#e8002d",
+    "STR": "#00665f",
+    "BOT": "#00e700",
+    "OCO": "#ff87bc",
+    "ALB": "#00a0dd",
+    "GAS": "#ff87bc",
+    "RIC": "#364aa9",
+    "TSU": "#364aa9",
+    "ZHO": "#00e700",
+    "MAG": "#b6babd",
+    "HAM": "#27f4d2",
+    "SAR": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_miami",
@@ -699,7 +923,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "LEC": "#e8002d",
+    "PIA": "#ff8000",
+    "SAI": "#e8002d",
+    "PER": "#0600ef",
+    "NOR": "#ff8000",
+    "HAM": "#27f4d2",
+    "HUL": "#b6babd",
+    "TSU": "#364aa9",
+    "RUS": "#27f4d2",
+    "STR": "#00665f",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "OCO": "#ff87bc",
+    "ALB": "#00a0dd",
+    "SAR": "#00a0dd",
+    "MAG": "#b6babd",
+    "ZHO": "#00e700",
+    "BOT": "#00e700",
+    "RIC": "#364aa9"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_emilia-romagna",
@@ -817,7 +1086,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "LEC": "#e8002d",
+    "SAI": "#e8002d",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "HAM": "#27f4d2",
+    "HUL": "#b6babd",
+    "TSU": "#364aa9",
+    "PER": "#0600ef",
+    "RIC": "#364aa9",
+    "OCO": "#ff87bc",
+    "STR": "#00665f",
+    "ALB": "#00a0dd",
+    "GAS": "#ff87bc",
+    "MAG": "#b6babd",
+    "BOT": "#00e700",
+    "ZHO": "#00e700",
+    "SAR": "#00a0dd",
+    "ALO": "#00665f"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_monaco",
@@ -935,7 +1249,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#e8002d",
+    "PIA": "#ff8000",
+    "SAI": "#e8002d",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "VER": "#0600ef",
+    "HAM": "#27f4d2",
+    "TSU": "#364aa9",
+    "ALB": "#00a0dd",
+    "GAS": "#ff87bc",
+    "STR": "#00665f",
+    "RIC": "#364aa9",
+    "ALO": "#00665f",
+    "SAR": "#00a0dd",
+    "BOT": "#00e700",
+    "ZHO": "#00e700",
+    "OCO": "#ff87bc",
+    "PER": "#0600ef",
+    "HUL": "#b6babd",
+    "MAG": "#b6babd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_canadian",
@@ -1054,7 +1413,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "ALO": "#00665f",
+    "HAM": "#27f4d2",
+    "RIC": "#364aa9",
+    "MAG": "#b6babd",
+    "STR": "#00665f",
+    "LEC": "#e8002d",
+    "TSU": "#364aa9",
+    "ALB": "#00a0dd",
+    "HUL": "#b6babd",
+    "SAI": "#e8002d",
+    "SAR": "#00a0dd",
+    "OCO": "#ff87bc",
+    "PER": "#0600ef",
+    "GAS": "#ff87bc",
+    "BOT": "#00e700",
+    "ZHO": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_spanish",
@@ -1172,7 +1576,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "HAM": "#27f4d2",
+    "LEC": "#e8002d",
+    "SAI": "#e8002d",
+    "GAS": "#ff87bc",
+    "PIA": "#ff8000",
+    "OCO": "#ff87bc",
+    "HUL": "#b6babd",
+    "PER": "#0600ef",
+    "ALO": "#00665f",
+    "STR": "#00665f",
+    "BOT": "#00e700",
+    "TSU": "#364aa9",
+    "MAG": "#b6babd",
+    "ZHO": "#00e700",
+    "SAR": "#00a0dd",
+    "RIC": "#364aa9",
+    "ALB": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_austrian",
@@ -1290,7 +1739,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "HAM": "#27f4d2",
+    "SAI": "#e8002d",
+    "PER": "#0600ef",
+    "PIA": "#ff8000",
+    "OCO": "#ff87bc",
+    "HUL": "#b6babd",
+    "MAG": "#b6babd",
+    "GAS": "#ff87bc",
+    "RIC": "#364aa9",
+    "ALO": "#00665f",
+    "TSU": "#364aa9",
+    "ALB": "#00a0dd",
+    "BOT": "#00e700",
+    "STR": "#00665f",
+    "LEC": "#e8002d",
+    "ZHO": "#00e700",
+    "SAR": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_british",
@@ -1404,7 +1898,51 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "HAM": "#27f4d2",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "SAI": "#e8002d",
+    "STR": "#00665f",
+    "LEC": "#e8002d",
+    "HUL": "#b6babd",
+    "ALO": "#00665f",
+    "TSU": "#364aa9",
+    "ALB": "#00a0dd",
+    "SAR": "#00a0dd",
+    "ZHO": "#00e700",
+    "RIC": "#364aa9",
+    "OCO": "#ff87bc",
+    "MAG": "#b6babd",
+    "BOT": "#00e700",
+    "PER": "#0600ef"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_hungarian",
@@ -1522,7 +2060,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "HAM": "#27f4d2",
+    "LEC": "#e8002d",
+    "ALO": "#00665f",
+    "SAI": "#e8002d",
+    "STR": "#00665f",
+    "ALB": "#00a0dd",
+    "MAG": "#b6babd",
+    "RIC": "#364aa9",
+    "TSU": "#364aa9",
+    "BOT": "#00e700",
+    "HUL": "#b6babd",
+    "OCO": "#ff87bc",
+    "RUS": "#27f4d2",
+    "PER": "#0600ef",
+    "SAR": "#00a0dd",
+    "ZHO": "#00e700",
+    "GAS": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_belgian",
@@ -1640,7 +2223,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#e8002d",
+    "HAM": "#27f4d2",
+    "PER": "#0600ef",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "SAI": "#e8002d",
+    "NOR": "#ff8000",
+    "ALO": "#00665f",
+    "VER": "#0600ef",
+    "ALB": "#00a0dd",
+    "OCO": "#ff87bc",
+    "GAS": "#ff87bc",
+    "BOT": "#00e700",
+    "RIC": "#364aa9",
+    "STR": "#00665f",
+    "HUL": "#b6babd",
+    "MAG": "#b6babd",
+    "ZHO": "#00e700",
+    "TSU": "#364aa9",
+    "SAR": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_dutch",
@@ -1758,7 +2386,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "PIA": "#ff8000",
+    "LEC": "#e8002d",
+    "PER": "#0600ef",
+    "GAS": "#ff87bc",
+    "ALO": "#00665f",
+    "SAI": "#e8002d",
+    "STR": "#00665f",
+    "HUL": "#b6babd",
+    "TSU": "#364aa9",
+    "HAM": "#27f4d2",
+    "BOT": "#00e700",
+    "RIC": "#364aa9",
+    "OCO": "#ff87bc",
+    "ALB": "#00a0dd",
+    "SAR": "#00a0dd",
+    "ZHO": "#00e700",
+    "MAG": "#b6babd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_italian",
@@ -1876,7 +2549,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "LEC": "#e8002d",
+    "NOR": "#ff8000",
+    "SAI": "#e8002d",
+    "HAM": "#27f4d2",
+    "VER": "#0600ef",
+    "RUS": "#27f4d2",
+    "PER": "#0600ef",
+    "ALB": "#00a0dd",
+    "ALO": "#00665f",
+    "RIC": "#364aa9",
+    "MAG": "#b6babd",
+    "GAS": "#ff87bc",
+    "TSU": "#364aa9",
+    "OCO": "#ff87bc",
+    "HUL": "#b6babd",
+    "STR": "#00665f",
+    "COL": "#00a0dd",
+    "BOT": "#00e700",
+    "ZHO": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_azerbaijan",
@@ -1994,7 +2712,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#e8002d",
+    "PIA": "#ff8000",
+    "PER": "#0600ef",
+    "SAI": "#e8002d",
+    "VER": "#0600ef",
+    "RUS": "#27f4d2",
+    "ALO": "#00665f",
+    "COL": "#00a0dd",
+    "ALB": "#00a0dd",
+    "BEA": "#b6babd",
+    "TSU": "#364aa9",
+    "NOR": "#ff8000",
+    "HUL": "#b6babd",
+    "RIC": "#364aa9",
+    "GAS": "#ff87bc",
+    "BOT": "#00e700",
+    "HAM": "#27f4d2",
+    "ZHO": "#00e700",
+    "OCO": "#ff87bc",
+    "STR": "#00665f"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_singapore",
@@ -2112,7 +2875,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "VER": "#0600ef",
+    "HAM": "#27f4d2",
+    "RUS": "#27f4d2",
+    "PIA": "#ff8000",
+    "HUL": "#b6babd",
+    "ALO": "#00665f",
+    "LEC": "#e8002d",
+    "COL": "#00a0dd",
+    "PER": "#0600ef",
+    "TSU": "#364aa9",
+    "SAI": "#e8002d",
+    "OCO": "#ff87bc",
+    "MAG": "#b6babd",
+    "ALB": "#00a0dd",
+    "RIC": "#364aa9",
+    "GAS": "#ff87bc",
+    "STR": "#00665f",
+    "BOT": "#00e700",
+    "ZHO": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_united-states",
@@ -2230,7 +3038,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#e8002d",
+    "VER": "#0600ef",
+    "SAI": "#e8002d",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "GAS": "#ff87bc",
+    "MAG": "#b6babd",
+    "TSU": "#364aa9",
+    "PER": "#0600ef",
+    "ALO": "#00665f",
+    "HUL": "#b6babd",
+    "HAM": "#27f4d2",
+    "STR": "#00665f",
+    "LAW": "#364aa9",
+    "ZHO": "#00e700",
+    "COL": "#00a0dd",
+    "BOT": "#00e700",
+    "ALB": "#00a0dd",
+    "RUS": "#27f4d2",
+    "OCO": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_mexico-city",
@@ -2348,7 +3201,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "SAI": "#e8002d",
+    "NOR": "#ff8000",
+    "LEC": "#e8002d",
+    "HAM": "#27f4d2",
+    "RUS": "#27f4d2",
+    "MAG": "#b6babd",
+    "HUL": "#b6babd",
+    "GAS": "#ff87bc",
+    "LAW": "#364aa9",
+    "STR": "#00665f",
+    "ALO": "#00665f",
+    "PER": "#0600ef",
+    "COL": "#00a0dd",
+    "BOT": "#00e700",
+    "ZHO": "#00e700",
+    "PIA": "#ff8000",
+    "OCO": "#ff87bc",
+    "ALB": "#00a0dd",
+    "TSU": "#364aa9"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_s\u00e3o-paulo",
@@ -2455,7 +3353,50 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "NOR": "#ff8000",
+    "TSU": "#364aa9",
+    "OCO": "#ff87bc",
+    "LEC": "#e8002d",
+    "LAW": "#364aa9",
+    "PIA": "#ff8000",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "HAM": "#27f4d2",
+    "VER": "#0600ef",
+    "COL": "#00a0dd",
+    "BEA": "#b6babd",
+    "HUL": "#b6babd",
+    "BOT": "#00e700",
+    "ZHO": "#00e700",
+    "SAI": "#e8002d",
+    "PER": "#0600ef"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_las-vegas",
@@ -2573,7 +3514,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "LEC": "#e8002d",
+    "SAI": "#e8002d",
+    "GAS": "#ff87bc",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "TSU": "#364aa9",
+    "PIA": "#ff8000",
+    "HUL": "#b6babd",
+    "HAM": "#27f4d2",
+    "OCO": "#ff87bc",
+    "ZHO": "#00e700",
+    "LAW": "#364aa9",
+    "MAG": "#b6babd",
+    "ALO": "#00665f",
+    "ALB": "#00a0dd",
+    "PER": "#0600ef",
+    "STR": "#00665f",
+    "BOT": "#00e700",
+    "COL": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_qatar",
@@ -2691,7 +3677,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "LEC": "#e8002d",
+    "PIA": "#ff8000",
+    "SAI": "#e8002d",
+    "PER": "#0600ef",
+    "ALO": "#00665f",
+    "HAM": "#27f4d2",
+    "TSU": "#364aa9",
+    "MAG": "#b6babd",
+    "GAS": "#ff87bc",
+    "BOT": "#00e700",
+    "LAW": "#364aa9",
+    "ZHO": "#00e700",
+    "ALB": "#00a0dd",
+    "STR": "#00665f",
+    "HUL": "#b6babd",
+    "OCO": "#ff87bc",
+    "COL": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2024_abu-dhabi",
@@ -2809,7 +3840,52 @@
     "DriverNumber": "24",
     "Team": "Kick Sauber"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "SAI": "#e8002d",
+    "GAS": "#ff87bc",
+    "RUS": "#27f4d2",
+    "HUL": "#b6babd",
+    "ALO": "#00665f",
+    "MAG": "#b6babd",
+    "LEC": "#e8002d",
+    "STR": "#00665f",
+    "LAW": "#364aa9",
+    "VER": "#0600ef",
+    "HAM": "#27f4d2",
+    "BOT": "#00e700",
+    "ZHO": "#00e700",
+    "ALB": "#00a0dd",
+    "DOO": "#ff87bc",
+    "TSU": "#364aa9",
+    "COL": "#00a0dd",
+    "PIA": "#ff8000",
+    "PER": "#0600ef"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e8002d",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "RB": "#364aa9",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_australian",
@@ -2927,7 +4003,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "VER": "#0600ef",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "LEC": "#e80020",
+    "TSU": "#fcd700",
+    "ALB": "#00a0dd",
+    "HAM": "#e80020",
+    "GAS": "#ff87bc",
+    "ALO": "#00665f",
+    "STR": "#00665f",
+    "HUL": "#00e700",
+    "ANT": "#27f4d2",
+    "BOR": "#00e700",
+    "OCO": "#b6babd",
+    "LAW": "#0600ef",
+    "BEA": "#b6babd",
+    "SAI": "#00a0dd",
+    "HAD": "#fcd700",
+    "DOO": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_chinese",
@@ -3044,7 +4165,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "HAM": "#e80020",
+    "LEC": "#e80020",
+    "VER": "#0600ef",
+    "ANT": "#27f4d2",
+    "TSU": "#fcd700",
+    "HAD": "#fcd700",
+    "OCO": "#b6babd",
+    "ALB": "#00a0dd",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "STR": "#00665f",
+    "SAI": "#00a0dd",
+    "BEA": "#b6babd",
+    "DOO": "#ff87bc",
+    "LAW": "#0600ef",
+    "HUL": "#00e700",
+    "BOR": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_japanese",
@@ -3162,7 +4328,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "RUS": "#27f4d2",
+    "ANT": "#27f4d2",
+    "HAD": "#fcd700",
+    "HAM": "#e80020",
+    "ALB": "#00a0dd",
+    "BEA": "#b6babd",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "TSU": "#0600ef",
+    "LAW": "#fcd700",
+    "HUL": "#00e700",
+    "SAI": "#00a0dd",
+    "OCO": "#b6babd",
+    "DOO": "#ff87bc",
+    "STR": "#00665f",
+    "BOR": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_bahrain",
@@ -3280,7 +4491,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "NOR": "#ff8000",
+    "LEC": "#e80020",
+    "GAS": "#ff87bc",
+    "SAI": "#00a0dd",
+    "ANT": "#27f4d2",
+    "VER": "#0600ef",
+    "HAM": "#e80020",
+    "TSU": "#0600ef",
+    "DOO": "#ff87bc",
+    "ALO": "#00665f",
+    "OCO": "#b6babd",
+    "ALB": "#00a0dd",
+    "BEA": "#b6babd",
+    "HAD": "#fcd700",
+    "LAW": "#fcd700",
+    "STR": "#00665f",
+    "BOR": "#00e700",
+    "HUL": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_saudi-arabian",
@@ -3397,7 +4653,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "LEC": "#e80020",
+    "ANT": "#27f4d2",
+    "HAM": "#e80020",
+    "SAI": "#00a0dd",
+    "NOR": "#ff8000",
+    "ALB": "#00a0dd",
+    "ALO": "#00665f",
+    "HAD": "#fcd700",
+    "LAW": "#fcd700",
+    "BEA": "#b6babd",
+    "STR": "#00665f",
+    "HUL": "#00e700",
+    "DOO": "#ff87bc",
+    "OCO": "#b6babd",
+    "BOR": "#00e700",
+    "TSU": "#0600ef",
+    "GAS": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_miami",
@@ -3515,7 +4816,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "ANT": "#27f4d2",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "ALB": "#00a0dd",
+    "NOR": "#ff8000",
+    "SAI": "#00a0dd",
+    "LEC": "#e80020",
+    "TSU": "#0600ef",
+    "OCO": "#b6babd",
+    "HAD": "#fcd700",
+    "HAM": "#e80020",
+    "BOR": "#00e700",
+    "HUL": "#00e700",
+    "STR": "#00665f",
+    "BEA": "#b6babd",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "LAW": "#fcd700",
+    "DOO": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_emilia-romagna",
@@ -3632,7 +4978,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "NOR": "#ff8000",
+    "ALO": "#00665f",
+    "SAI": "#00a0dd",
+    "ALB": "#00a0dd",
+    "STR": "#00665f",
+    "GAS": "#ff87bc",
+    "LEC": "#e80020",
+    "HAD": "#fcd700",
+    "ANT": "#27f4d2",
+    "HAM": "#e80020",
+    "BOR": "#00e700",
+    "LAW": "#fcd700",
+    "HUL": "#00e700",
+    "COL": "#ff87bc",
+    "BEA": "#b6babd",
+    "TSU": "#0600ef",
+    "OCO": "#b6babd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_monaco",
@@ -3750,7 +5141,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "LEC": "#e80020",
+    "PIA": "#ff8000",
+    "VER": "#0600ef",
+    "HAD": "#fcd700",
+    "ALO": "#00665f",
+    "HAM": "#e80020",
+    "OCO": "#b6babd",
+    "LAW": "#fcd700",
+    "ALB": "#00a0dd",
+    "SAI": "#00a0dd",
+    "HUL": "#00e700",
+    "RUS": "#27f4d2",
+    "ANT": "#27f4d2",
+    "COL": "#ff87bc",
+    "STR": "#00665f",
+    "TSU": "#0600ef",
+    "GAS": "#ff87bc",
+    "BEA": "#b6babd",
+    "BOR": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_spanish",
@@ -3863,7 +5299,51 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "HAM": "#e80020",
+    "LEC": "#e80020",
+    "RUS": "#27f4d2",
+    "ANT": "#27f4d2",
+    "GAS": "#ff87bc",
+    "HAD": "#fcd700",
+    "ALO": "#00665f",
+    "HUL": "#00e700",
+    "BOR": "#00e700",
+    "LAW": "#fcd700",
+    "ALB": "#00a0dd",
+    "BEA": "#b6babd",
+    "OCO": "#b6babd",
+    "SAI": "#00a0dd",
+    "COL": "#ff87bc",
+    "TSU": "#0600ef"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_canadian",
@@ -3981,7 +5461,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "VER": "#0600ef",
+    "ANT": "#27f4d2",
+    "PIA": "#ff8000",
+    "HAM": "#e80020",
+    "ALO": "#00665f",
+    "NOR": "#ff8000",
+    "LEC": "#e80020",
+    "HUL": "#00e700",
+    "COL": "#ff87bc",
+    "HAD": "#fcd700",
+    "ALB": "#00a0dd",
+    "BEA": "#b6babd",
+    "OCO": "#b6babd",
+    "BOR": "#00e700",
+    "SAI": "#00a0dd",
+    "TSU": "#0600ef",
+    "STR": "#00665f",
+    "LAW": "#fcd700",
+    "GAS": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_austrian",
@@ -4094,7 +5619,51 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "HAM": "#e80020",
+    "RUS": "#27f4d2",
+    "GAS": "#ff87bc",
+    "ALB": "#00a0dd",
+    "BOR": "#00e700",
+    "LAW": "#fcd700",
+    "ALO": "#00665f",
+    "COL": "#ff87bc",
+    "BEA": "#b6babd",
+    "STR": "#00665f",
+    "OCO": "#b6babd",
+    "TSU": "#0600ef",
+    "HAD": "#fcd700",
+    "HUL": "#00e700",
+    "VER": "#0600ef",
+    "ANT": "#27f4d2"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_british",
@@ -4208,7 +5777,51 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "PIA": "#ff8000",
+    "NOR": "#ff8000",
+    "HAM": "#e80020",
+    "GAS": "#ff87bc",
+    "ALO": "#00665f",
+    "SAI": "#00a0dd",
+    "ANT": "#27f4d2",
+    "ALB": "#00a0dd",
+    "TSU": "#0600ef",
+    "HUL": "#00e700",
+    "STR": "#00665f",
+    "OCO": "#b6babd",
+    "RUS": "#27f4d2",
+    "LEC": "#e80020",
+    "HAD": "#fcd700",
+    "BOR": "#00e700",
+    "BEA": "#b6babd",
+    "LAW": "#fcd700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_belgian",
@@ -4327,7 +5940,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "VER": "#0600ef",
+    "ALB": "#00a0dd",
+    "RUS": "#27f4d2",
+    "TSU": "#0600ef",
+    "HAD": "#fcd700",
+    "LAW": "#fcd700",
+    "BOR": "#00e700",
+    "OCO": "#b6babd",
+    "BEA": "#b6babd",
+    "GAS": "#ff87bc",
+    "HUL": "#00e700",
+    "COL": "#ff87bc",
+    "STR": "#00665f",
+    "SAI": "#00a0dd",
+    "HAM": "#e80020",
+    "ANT": "#27f4d2",
+    "ALO": "#00665f"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_hungarian",
@@ -4445,7 +6103,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "LEC": "#e80020",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "ALO": "#00665f",
+    "NOR": "#ff8000",
+    "BOR": "#00e700",
+    "STR": "#00665f",
+    "LAW": "#fcd700",
+    "VER": "#0600ef",
+    "BEA": "#b6babd",
+    "HAD": "#fcd700",
+    "SAI": "#00a0dd",
+    "ANT": "#27f4d2",
+    "HAM": "#e80020",
+    "OCO": "#b6babd",
+    "ALB": "#00a0dd",
+    "HUL": "#00e700",
+    "COL": "#ff87bc",
+    "GAS": "#ff87bc",
+    "TSU": "#0600ef"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_dutch",
@@ -4563,7 +6266,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "HAD": "#fcd700",
+    "LEC": "#e80020",
+    "RUS": "#27f4d2",
+    "HAM": "#e80020",
+    "LAW": "#fcd700",
+    "SAI": "#00a0dd",
+    "ALB": "#00a0dd",
+    "TSU": "#0600ef",
+    "ANT": "#27f4d2",
+    "ALO": "#00665f",
+    "GAS": "#ff87bc",
+    "COL": "#ff87bc",
+    "OCO": "#b6babd",
+    "HUL": "#00e700",
+    "BOR": "#00e700",
+    "STR": "#00665f",
+    "BEA": "#b6babd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_italian",
@@ -4676,7 +6424,51 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "RUS": "#27f4d2",
+    "ALO": "#00665f",
+    "BOR": "#00e700",
+    "HAM": "#e80020",
+    "TSU": "#0600ef",
+    "ANT": "#27f4d2",
+    "BEA": "#b6babd",
+    "SAI": "#00a0dd",
+    "ALB": "#00a0dd",
+    "OCO": "#b6babd",
+    "LAW": "#fcd700",
+    "STR": "#00665f",
+    "COL": "#ff87bc",
+    "HAD": "#fcd700",
+    "GAS": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_azerbaijan",
@@ -4793,7 +6585,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "SAI": "#00a0dd",
+    "LAW": "#fcd700",
+    "ANT": "#27f4d2",
+    "RUS": "#27f4d2",
+    "TSU": "#0600ef",
+    "HAD": "#fcd700",
+    "NOR": "#ff8000",
+    "LEC": "#e80020",
+    "HAM": "#e80020",
+    "ALO": "#00665f",
+    "BOR": "#00e700",
+    "STR": "#00665f",
+    "COL": "#ff87bc",
+    "BEA": "#b6babd",
+    "GAS": "#ff87bc",
+    "HUL": "#00e700",
+    "OCO": "#b6babd",
+    "ALB": "#00a0dd",
+    "PIA": "#ff8000"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_singapore",
@@ -4911,7 +6748,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "RUS": "#27f4d2",
+    "VER": "#0600ef",
+    "NOR": "#ff8000",
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "ANT": "#27f4d2",
+    "HAM": "#e80020",
+    "HAD": "#fcd700",
+    "ALO": "#00665f",
+    "BEA": "#b6babd",
+    "HUL": "#00e700",
+    "LAW": "#fcd700",
+    "COL": "#ff87bc",
+    "STR": "#00665f",
+    "BOR": "#00e700",
+    "TSU": "#0600ef",
+    "OCO": "#b6babd",
+    "SAI": "#00a0dd",
+    "GAS": "#ff87bc",
+    "ALB": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_united-states",
@@ -5029,7 +6911,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "VER": "#0600ef",
+    "LEC": "#e80020",
+    "NOR": "#ff8000",
+    "HAM": "#e80020",
+    "PIA": "#ff8000",
+    "RUS": "#27f4d2",
+    "ANT": "#27f4d2",
+    "BEA": "#b6babd",
+    "SAI": "#00a0dd",
+    "TSU": "#0600ef",
+    "HUL": "#00e700",
+    "ALO": "#00665f",
+    "LAW": "#fcd700",
+    "GAS": "#ff87bc",
+    "OCO": "#b6babd",
+    "BOR": "#00e700",
+    "COL": "#ff87bc",
+    "STR": "#00665f",
+    "HAD": "#fcd700",
+    "ALB": "#00a0dd"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_mexico-city",
@@ -5147,7 +7074,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "LEC": "#e80020",
+    "HAM": "#e80020",
+    "VER": "#0600ef",
+    "RUS": "#27f4d2",
+    "BEA": "#b6babd",
+    "ANT": "#27f4d2",
+    "TSU": "#0600ef",
+    "PIA": "#ff8000",
+    "OCO": "#b6babd",
+    "HAD": "#fcd700",
+    "SAI": "#00a0dd",
+    "BOR": "#00e700",
+    "LAW": "#fcd700",
+    "GAS": "#ff87bc",
+    "ALO": "#00665f",
+    "HUL": "#00e700",
+    "ALB": "#00a0dd",
+    "STR": "#00665f",
+    "COL": "#ff87bc"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2025_s\u00e3o-paulo",
@@ -5265,7 +7237,52 @@
     "DriverNumber": "1",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "NOR": "#ff8000",
+    "ANT": "#27f4d2",
+    "LEC": "#e80020",
+    "PIA": "#ff8000",
+    "HAD": "#fcd700",
+    "LAW": "#fcd700",
+    "RUS": "#27f4d2",
+    "GAS": "#ff87bc",
+    "BEA": "#b6babd",
+    "ALO": "#00665f",
+    "ALB": "#00a0dd",
+    "HUL": "#00e700",
+    "SAI": "#00a0dd",
+    "TSU": "#0600ef",
+    "STR": "#00665f",
+    "COL": "#ff87bc",
+    "HAM": "#e80020",
+    "VER": "#0600ef",
+    "OCO": "#b6babd",
+    "BOR": "#00e700"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Kick Sauber": "#00e700",
+    "Williams": "#00a0dd"
+   }
+  }
  },
  {
   "slug": "2026_japanese",
@@ -5393,6 +7410,54 @@
     "DriverNumber": "3",
     "Team": "Red Bull Racing"
    }
-  ]
+  ],
+  "colors": {
+   "drivers": {
+    "PIA": "#ff8000",
+    "LEC": "#e80020",
+    "NOR": "#ff8000",
+    "RUS": "#27f4d2",
+    "HAM": "#e80020",
+    "ANT": "#27f4d2",
+    "GAS": "#ff87bc",
+    "HAD": "#0600ef",
+    "LIN": "#fcd700",
+    "VER": "#0600ef",
+    "OCO": "#b6babd",
+    "LAW": "#fcd700",
+    "BOR": "#ff2d00",
+    "COL": "#ff87bc",
+    "SAI": "#00a0dd",
+    "BEA": "#b6babd",
+    "ALB": "#00a0dd",
+    "PER": "#444444",
+    "HUL": "#ff2d00",
+    "ALO": "#00665f",
+    "BOT": "#444444",
+    "STR": "#00665f"
+   },
+   "compounds": {
+    "SOFT": "#da291c",
+    "MEDIUM": "#ffd12e",
+    "HARD": "#f0f0ec",
+    "INTERMEDIATE": "#43b02a",
+    "WET": "#0067ad",
+    "UNKNOWN": "#00ffff",
+    "TEST-UNKNOWN": "#434649"
+   },
+   "teams": {
+    "Alpine": "#ff87bc",
+    "Aston Martin": "#00665f",
+    "Audi": "#ff2d00",
+    "Cadillac": "#444444",
+    "Ferrari": "#e80020",
+    "Haas F1 Team": "#b6babd",
+    "McLaren": "#ff8000",
+    "Mercedes": "#27f4d2",
+    "Racing Bulls": "#fcd700",
+    "Red Bull Racing": "#0600ef",
+    "Williams": "#00a0dd"
+   }
+  }
  }
 ]

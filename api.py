@@ -104,6 +104,9 @@ def race_detail(slug: str):
         "compounds": entry["compounds"],
         "is_wet": bool(set(entry["compounds"]) & model.WET_COMPOUNDS),
         "drivers": entry["drivers"],
+        # Official liveries for this season, resolved at ingest. Sent once per
+        # race rather than per lap: the map is static for the session.
+        "colors": entry.get("colors", {}),
         "pit_loss": round(strategy.measure_pit_loss(laps, int(laps["LapNumber"].max())), 2),
     }
 

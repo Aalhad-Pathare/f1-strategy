@@ -64,7 +64,40 @@ def normalise_laps(ses) -> pd.DataFrame:
     return laps.sort_values(["LapNumber", "Position"]).reset_index(drop=True)
 
 
-def build_meta(year: int, rnd, event_name: str, laps: pd.DataFrame) -> dict:
+def extract_colors(ses, laps: pd.DataFrame) -> dict:
+    """Official team and compound colours for this session.
+
+    Taken from FastF1 rather than hardcoded: liveries change between seasons and
+    teams rebrand (Racing Bulls, Kick Sauber), so a static map would silently go
+    stale. Failures are non-fatal - the UI falls back to a neutral colour.
+    """
+    import fastf1.plotting as fp
+
+    drivers: dict[str, str] = {}
+    for drv in laps["Driver"].dropna().unique():
+        try:
+            drivers[str(drv)] = fp.get_driver_color(str(drv), ses)
+        except Exception:  # noqa: BLE001 - a missing colour must not fail ingest
+            pass
+
+    compounds: dict[str, str] = {}
+    try:
+        compounds = {k: v for k, v in fp.get_compound_mapping(ses).items()}
+    except Exception:  # noqa: BLE001
+        pass
+
+    teams: dict[str, str] = {}
+    try:
+        for t in fp.list_team_names(ses):
+            teams[str(t)] = fp.get_team_color(t, ses)
+    except Exception:  # noqa: BLE001
+        pass
+
+    return {"drivers": drivers, "compounds": compounds, "teams": teams}
+
+
+def build_meta(year: int, rnd, event_name: str, laps: pd.DataFrame,
+               ses=None) -> dict:
     drivers = (
         laps[["Driver", "DriverNumber", "Team"]]
         .dropna(subset=["Driver"])
@@ -84,6 +117,7 @@ def build_meta(year: int, rnd, event_name: str, laps: pd.DataFrame) -> dict:
         "green_pct": round(100.0 * laps["IsGreen"].mean(), 1),
         "compounds": sorted(laps["Compound"].dropna().unique().tolist()),
         "drivers": drivers,
+        "colors": extract_colors(ses, laps) if ses is not None else {},
     }
 
 
@@ -97,4 +131,4 @@ def ingest_race(year: int, rnd, event_name: str) -> tuple[pd.DataFrame, dict]:
     laps = normalise_laps(ses)
     if laps.empty or laps["LapNumber"].isna().all():
         raise NoLapData(f"{year} r{rnd} {event_name}: session has no lap data")
-    return laps, build_meta(year, rnd, event_name, laps)
+    return laps, build_meta(year, rnd, event_name, laps, ses)

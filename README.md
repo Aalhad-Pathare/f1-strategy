@@ -33,7 +33,8 @@ Ingest more races (FastF1 rate-limits at 500 calls/hour):
 | `model.py` | Fuel-corrected degradation model |
 | `strategy.py` | Pit-window search, undercut/overcut analysis |
 | `api.py` | FastAPI service |
-| `static/index.html` | Front end |
+| `static/index.html` | Front end (F1 palette, official team liveries) |
+| `backfill_colors.py` | One-off: add liveries to races ingested before colours existed |
 | `validate.py` | Out-of-sample model validation |
 | `backtest.py` | Recommendations vs. what teams actually did |
 
@@ -125,6 +126,18 @@ first stop:
 - best: Bahrain (MAE 1.9 laps, 93% within 5)
 
 Teams are not a perfect oracle, so agreement is evidence rather than proof.
+
+## Colours
+
+Team and compound colours come from FastF1 per session rather than a hardcoded
+map, because liveries change: Hamilton is Mercedes teal in 2024 and Ferrari red
+in 2025, and Sainz goes Ferrari red to Williams blue. They are resolved at ingest
+and stored with the race, then sent once per race rather than per lap.
+
+The official palettes are designed for dark broadcast graphics, so the pale ones
+(HARD is `#f0f0ec`, Haas `#b6babd`) disappear against a light background. The UI
+darkens anything above a luminance threshold instead of substituting a different
+colour, so the livery stays recognisable.
 
 ## Known limitations
 
