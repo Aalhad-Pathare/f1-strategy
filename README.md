@@ -120,8 +120,6 @@ The deployed system is small on purpose. Five services, each carrying real load:
 | **IAM** | `f1-strategy-lambda-role` | Execution role. `AWSLambdaBasicExecutionRole` only — the read path touches no other service, so it needs nothing else. |
 | **CloudWatch Logs** | `/aws/lambda/f1-strategy-api` | Created by Lambda automatically; where the function's output goes. |
 
-Cold start ~0.33s, warm ~0.28s.
-
 That is the whole deployed footprint. A CloudFront distribution and Origin Access
 Control existed briefly while working around the blocked Function URL described
 below; both have been deleted, along with the Lambda resource-policy statement
@@ -130,9 +128,8 @@ working reference for the OAC pattern, but nothing runs it.
 
 ### What is not on AWS
 
-**No S3, DynamoDB, SQS, Step Functions, ECS, or Kafka.** The account has zero of
-each — verified, not assumed. Where this project needs the capability one of those
-would provide, it uses a local implementation instead:
+**No S3, DynamoDB, SQS, Step Functions, ECS, or Kafka.** . Where this project needs the capability one of those
+would provide, it uses a local implementation for now:
 
 | Capability | What this project uses | Managed service it would map to |
 |---|---|---|
@@ -143,11 +140,6 @@ would provide, it uses a local implementation instead:
 | Ingest workers | daemon threads, local only | Lambda consumers with reserved concurrency |
 | Upstream throttling | rate limiter, 35 races/hour | Step Functions Map with a concurrency cap |
 
-These are **working implementations, not mocks** — the queue really queues, the
-workers really fetch, the limiter really throttles, and the whole path was verified
-end to end by downloading a race that was not in the store. They are simply local:
-they run when you run the app on your own machine, and none of them are part of the
-deployed build, which serves a fixed dataset with ingest switched off.
 
 The interfaces were written so that swapping in the managed services changes
 implementations rather than the API. That is a design intention, not a completed
@@ -223,52 +215,10 @@ bash deploy/deploy-apigw.sh  # expose it through an HTTP API
 bash deploy/teardown.sh      # remove everything so nothing keeps billing
 ```
 
-**Cost.** Lambda's always-free tier covers 1M requests and 400,000 GB-seconds per
-month. API Gateway gives 1M requests/month free for 12 months, then $1.00 per
-million. ECR storage is ~$0.05/month for a 500MB image. At portfolio traffic the
-whole thing is a few cents a month.
 
-### Three deployment problems worth recording
 
-None were obvious from their error messages.
 
-**ECR rejected the lifecycle policy.** `imageCountMoreThanN` — the obvious "keep
-last N images" rule — returns `matched 0 out of 4`, including in its newer
-`tagPatternList` form, while `sinceImagePushed` is accepted. The policy now
-expires untagged images, which is what actually reclaims space since each push
-orphans the previous `latest`.
-
-**Lambda rejected the image:** *"manifest, config or layer media type is not
-supported"*. Buildx, the default builder since Docker 23, attaches provenance and
-SBOM attestations, turning the push into a manifest list Lambda will not accept.
-Fixed with `--provenance=false --sbom=false`.
-
-**Public Function URLs are blocked in this account.** Every request returned 403
-before the function was invoked, with a provably correct `AuthType=NONE` config
-and resource policy. CloudFront with Origin Access Control — the pattern AWS
-recommends instead — failed identically. Three observations pinned it down: a
-manually SigV4-signed request from an IAM user returned 200, the function's log
-group recorded that request but never a CloudFront one, and the account is not in
-an Organization so no SCP explains it. The IAM user is authorised by an *identity*
-policy while CloudFront relies solely on the *resource* policy, which the
-account-level block appears to override. An API Gateway HTTP API avoids function
-URLs altogether, invoking through `lambda:InvokeFunction` with the `apigateway`
-principal.
-
----
-
-## Colours
-
-Team and compound colours come from FastF1 per session rather than a hardcoded
-map, because liveries change: Hamilton is Mercedes teal in 2024 and Ferrari red in
-2025, and Sainz goes Ferrari red to Williams blue.
-
-The official palettes are designed for dark broadcast graphics, so the pale ones
-(HARD is `#f0f0ec`, Haas `#b6babd`) disappear against a light background. The UI
-darkens anything above a luminance threshold instead of substituting a different
-colour, so the livery stays recognisable.
-
-## Known limitations
+## Known limitations and potential improvements
 
 - **No safety cars.** A stop under an SC is nearly free; the engine has no concept
   of one, which explains most large backtest disagreements.
