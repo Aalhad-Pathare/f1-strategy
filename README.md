@@ -1,25 +1,12 @@
 # F1 Tyre Strategy Engine
 
-[![Live demo](https://img.shields.io/badge/demo-live-E10600?logo=amazonaws&logoColor=white)](https://mq1yvieau8.execute-api.us-east-1.amazonaws.com)
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-FF9900?logo=awslambda&logoColor=white)](https://aws.amazon.com/lambda/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+**[Live demo →](https://mq1yvieau8.execute-api.us-east-1.amazonaws.com)**
 
 Replays a historical Formula 1 race lap by lap and recommends tyre strategy for
 any car: when to pit, which compound to fit, and whether an undercut or overcut
 is available against nearby rivals.
 
-## View the live demo
-
-**→ [mq1yvieau8.execute-api.us-east-1.amazonaws.com](https://mq1yvieau8.execute-api.us-east-1.amazonaws.com)**
-
-Pick a season and race, scrub the lap slider, and click any car to focus it.
-
 ![Overview](docs/screenshots/01-overview.png)
-
-## Overview
 
 Recommendations are **causal**. At lap N the engine sees only laps 1..N, so a
 replayed call is a genuine decision rather than hindsight. This is enforced
@@ -34,21 +21,11 @@ could claw back before Piastri responds.
 ![Rival calls](docs/screenshots/02-rivals.png)
 
 Every round of every season from 2018 is selectable. Races already downloaded are
-marked; anything else is fetched on demand when running locally.
+marked; anything else is fetched on demand.
 
 ![Season picker](docs/screenshots/03-seasons.png)
 
-## Project status
-
-| | |
-|---|---|
-| Races in the shipped dataset | 47 (2024 ×24, 2025 ×21, plus 2022 and 2026 samples) |
-| Seasons selectable | 2018–2026 |
-| Out-of-sample pace MAE | 0.626 s over 41 dry races |
-| Compound ordering correct | 96% |
-| Backtest vs. real first stops | median error −1.0 laps, 84% within 10 |
-| Cold start / warm response | ~0.33 s / ~0.28 s |
-| Application code | ~2,500 lines Python + one HTML file |
+---
 
 ## The modelling problem
 
@@ -214,51 +191,20 @@ the managed service it would become.
 
 ---
 
-## Getting started
-
-### Prerequisites
-
-- Python 3.12+
-- Docker and the AWS CLI (only if you intend to deploy)
-
-### Clone and install
+## Running it
 
 ```bash
-git clone https://github.com/Aalhad-Pathare/f1-strategy.git
-cd f1-strategy
-python -m venv .venv
-.venv/bin/pip install -r requirements-worker.txt
-```
-
-`requirements-api.txt` is the deployed subset and excludes FastF1; use
-`requirements-worker.txt` locally so you can ingest races.
-
-### Run locally
-
-```bash
+python -m venv .venv && .venv/bin/pip install -r requirements-worker.txt
 .venv/bin/uvicorn api:app --port 8000     # http://localhost:8000
 ```
 
-The 47 bundled races work immediately. Any other race from 2018 onward can be
-downloaded from the picker.
-
-### Ingest races in bulk
+Ingest more races (FastF1 rate-limits at 500 calls/hour):
 
 ```bash
 .venv/bin/python ingest.py --years 2024 2025
 ```
 
-FastF1 rate-limits at 500 calls/hour (~11 per race). The CLI skips races already
-present, so re-running after a limit resumes where it stopped.
-
-### Verify the model
-
-```bash
-.venv/bin/python validate.py            # out-of-sample MAE, compound ordering
-.venv/bin/python backtest.py --races 8  # recommendations vs. real pit stops
-```
-
-### Deploy
+## Deploying
 
 ```bash
 bash deploy/preflight.sh     # checks credentials, docker, data, schedules
@@ -269,8 +215,8 @@ bash deploy/teardown.sh      # remove everything so nothing keeps billing
 
 **Cost.** Lambda's always-free tier covers 1M requests and 400,000 GB-seconds per
 month. API Gateway gives 1M requests/month free for 12 months, then $1.00 per
-million. ECR storage is ~$0.03/month for the image. At portfolio traffic the whole
-thing is a few cents a month.
+million. ECR storage is ~$0.05/month for a 500MB image. At portfolio traffic the
+whole thing is a few cents a month.
 
 ### Three deployment problems worth recording
 
@@ -298,6 +244,8 @@ policy while CloudFront relies solely on the *resource* policy, which the
 account-level block appears to override. An API Gateway HTTP API avoids function
 URLs altogether, invoking through `lambda:InvokeFunction` with the `apigateway`
 principal.
+
+---
 
 ## Colours
 
@@ -332,32 +280,7 @@ colour, so the livery stays recognisable.
 
 ## Data
 
-Ships with 47 races. Any race from 2018 onward is fetchable when running locally.
+Ships with 47 races (2024 ×24, 2025 ×21, 2026 ×1, plus one on-demand test). Any
+race from 2018 onward is fetchable when running locally.
 
-Race data comes from [FastF1](https://github.com/theOehrly/Fast-F1), which wraps
-Formula 1's timing API. The Parquet files in `data/` are derived from it. This
-project is not affiliated with, endorsed by, or connected to Formula 1, and
-"Formula 1", "F1" and related marks are trademarks of Formula One Licensing BV.
-
-## Reporting issues
-
-Found a bug, or a race where the recommendations look wrong? Please
-[open an issue](https://github.com/Aalhad-Pathare/f1-strategy/issues) with the
-season, round, lap and driver, so it can be reproduced against the same prefix of
-the race the engine saw.
-
-## License
-
-Released under the [MIT License](LICENSE) — free to use, modify and distribute
-with attribution. The licence covers the code in this repository; the underlying
-timing data belongs to its respective owners as noted above.
-
-## Acknowledgements
-
-- **[FastF1](https://github.com/theOehrly/Fast-F1)** — timing, telemetry and
-  session data, plus the official team and compound colours used throughout the UI
-- **[FastAPI](https://fastapi.tiangolo.com/)** — the API layer
-- **[Mangum](https://github.com/Kludex/mangum)** — ASGI adapter that lets the same
-  app run under uvicorn locally and Lambda in production
-- **[pandas](https://pandas.pydata.org/)** and **[NumPy](https://numpy.org/)** —
-  lap-table wrangling and the least-squares pace fit
+Data: [FastF1](https://github.com/theOehrly/Fast-F1). Not affiliated with Formula 1.
