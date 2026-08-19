@@ -19,7 +19,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 import dataio
+import jobs
 import model
+import schedule
 import strategy
 
 app = FastAPI(title="F1 Tyre Strategy", version="1.0")
@@ -32,6 +34,15 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+
+JOB_DB = pathlib.Path(__file__).parent / "data" / "jobs.db"
+
+
+@app.on_event("startup")
+def _startup() -> None:
+    jobs.init(JOB_DB)
+    jobs.start_workers()
 
 
 @functools.lru_cache(maxsize=8)
@@ -131,6 +142,100 @@ def driver_recommendation(slug: str, lap: int, code: str):
     lap = max(1, min(lap, total))
     rec = strategy.recommend(laps, slug, lap, code.upper())
     return _clean(rec)
+
+
+@app.get("/api/seasons")
+def list_seasons():
+    """Years the upstream source covers, newest first."""
+    ingested: dict[int, int] = {}
+    for e in dataio.catalog():
+        ingested[e["year"]] = ingested.get(e["year"], 0) + 1
+    return [{"year": y, "ingested": ingested.get(y, 0)}
+            for y in schedule.available_years()]
+
+
+@app.get("/api/seasons/{year}")
+def season_rounds(year: int):
+    """Every round in a season, with whether its data is ready.
+
+    Driven by the upstream schedule rather than by the store, so the picker can
+    offer races that have not been ingested yet - which is the point of the
+    on-demand flow.
+    """
+    if year not in schedule.available_years():
+        raise HTTPException(404, f"no schedule for {year}")
+    try:
+        rounds = schedule.season(year)
+    except Exception as exc:  # noqa: BLE001 - upstream schedule fetch can fail
+        raise HTTPException(502, f"schedule unavailable: {exc}")
+
+    out = []
+    for r in rounds:
+        e = dataio.entry(r["slug"])
+        job = jobs.job_for_slug(r["slug"]) if e is None else None
+        out.append({
+            **r,
+            "ready": e is not None,
+            "total_laps": e["total_laps"] if e else None,
+            "is_wet": bool(set(e["compounds"]) & model.WET_COMPOUNDS) if e else None,
+            "job": None if job is None else {"id": job.id, "state": job.state},
+            # A race that has not happened cannot be fetched.
+            "ingestable": bool(r["is_past"]) and e is None,
+        })
+    return {"year": year, "rounds": out, "rate": jobs.rate_budget()}
+
+
+@app.post("/api/ingest")
+def request_ingest(year: int, round: int):
+    """Queue a race for ingest and return its job.
+
+    Returns immediately: the fetch takes 1-2 minutes upstream, so the UI polls
+    the job rather than holding a request open.
+    """
+    try:
+        rounds = schedule.season(year)
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(502, f"schedule unavailable: {exc}")
+
+    r = next((x for x in rounds if x["round"] == round), None)
+    if r is None:
+        raise HTTPException(404, f"{year} has no round {round}")
+    if not r["is_past"]:
+        raise HTTPException(409, f"{r['event']} has not been run yet")
+    if dataio.has_race(r["slug"]):
+        return {"state": "done", "slug": r["slug"], "already_present": True}
+
+    budget = jobs.rate_budget()
+    job, created = jobs.submit(year, round, r["event"], r["slug"])
+    return {
+        "id": job.id, "slug": job.slug, "event": job.event,
+        "state": job.state, "created": created,
+        "queue_depth": jobs.queue_depth(), "rate": budget,
+    }
+
+
+@app.get("/api/jobs/{job_id}")
+def job_status(job_id: str):
+    job = jobs.get_job(job_id)
+    if job is None:
+        raise HTTPException(404, f"unknown job {job_id!r}")
+    return {
+        "id": job.id, "slug": job.slug, "event": job.event, "year": job.year,
+        "state": job.state, "attempts": job.attempts, "error": job.error,
+        "age_s": round(job.age_s, 1),
+        "ready": dataio.has_race(job.slug),
+    }
+
+
+@app.get("/api/jobs")
+def list_jobs():
+    return {
+        "queue_depth": jobs.queue_depth(),
+        "rate": jobs.rate_budget(),
+        "jobs": [{"id": j.id, "slug": j.slug, "state": j.state,
+                  "attempts": j.attempts, "error": j.error,
+                  "age_s": round(j.age_s, 1)} for j in jobs.recent_jobs()],
+    }
 
 
 @app.get("/healthz")

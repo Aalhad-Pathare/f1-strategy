@@ -1,0 +1,194 @@
+[
+ {
+  "round": 1,
+  "event": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "2025-03-16",
+  "is_past": true,
+  "slug": "2025_australian"
+ },
+ {
+  "round": 2,
+  "event": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "2025-03-23",
+  "is_past": true,
+  "slug": "2025_chinese"
+ },
+ {
+  "round": 3,
+  "event": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "2025-04-06",
+  "is_past": true,
+  "slug": "2025_japanese"
+ },
+ {
+  "round": 4,
+  "event": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "2025-04-13",
+  "is_past": true,
+  "slug": "2025_bahrain"
+ },
+ {
+  "round": 5,
+  "event": "Saudi Arabian Grand Prix",
+  "location": "Jeddah",
+  "date": "2025-04-20",
+  "is_past": true,
+  "slug": "2025_saudi-arabian"
+ },
+ {
+  "round": 6,
+  "event": "Miami Grand Prix",
+  "location": "Miami Gardens",
+  "date": "2025-05-04",
+  "is_past": true,
+  "slug": "2025_miami"
+ },
+ {
+  "round": 7,
+  "event": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "2025-05-18",
+  "is_past": true,
+  "slug": "2025_emilia-romagna"
+ },
+ {
+  "round": 8,
+  "event": "Monaco Grand Prix",
+  "location": "Monaco",
+  "date": "2025-05-25",
+  "is_past": true,
+  "slug": "2025_monaco"
+ },
+ {
+  "round": 9,
+  "event": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "2025-06-01",
+  "is_past": true,
+  "slug": "2025_spanish"
+ },
+ {
+  "round": 10,
+  "event": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "2025-06-15",
+  "is_past": true,
+  "slug": "2025_canadian"
+ },
+ {
+  "round": 11,
+  "event": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "2025-06-29",
+  "is_past": true,
+  "slug": "2025_austrian"
+ },
+ {
+  "round": 12,
+  "event": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "2025-07-06",
+  "is_past": true,
+  "slug": "2025_british"
+ },
+ {
+  "round": 13,
+  "event": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "2025-07-27",
+  "is_past": true,
+  "slug": "2025_belgian"
+ },
+ {
+  "round": 14,
+  "event": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "2025-08-03",
+  "is_past": true,
+  "slug": "2025_hungarian"
+ },
+ {
+  "round": 15,
+  "event": "Dutch Grand Prix",
+  "location": "Zandvoort",
+  "date": "2025-08-31",
+  "is_past": true,
+  "slug": "2025_dutch"
+ },
+ {
+  "round": 16,
+  "event": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "2025-09-07",
+  "is_past": true,
+  "slug": "2025_italian"
+ },
+ {
+  "round": 17,
+  "event": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "2025-09-21",
+  "is_past": true,
+  "slug": "2025_azerbaijan"
+ },
+ {
+  "round": 18,
+  "event": "Singapore Grand Prix",
+  "location": "Marina Bay",
+  "date": "2025-10-05",
+  "is_past": true,
+  "slug": "2025_singapore"
+ },
+ {
+  "round": 19,
+  "event": "United States Grand Prix",
+  "location": "Austin",
+  "date": "2025-10-19",
+  "is_past": true,
+  "slug": "2025_united-states"
+ },
+ {
+  "round": 20,
+  "event": "Mexico City Grand Prix",
+  "location": "Mexico City",
+  "date": "2025-10-26",
+  "is_past": true,
+  "slug": "2025_mexico-city"
+ },
+ {
+  "round": 21,
+  "event": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "2025-11-09",
+  "is_past": true,
+  "slug": "2025_s\u00e3o-paulo"
+ },
+ {
+  "round": 22,
+  "event": "Las Vegas Grand Prix",
+  "location": "Las Vegas",
+  "date": "2025-11-22",
+  "is_past": true,
+  "slug": "2025_las-vegas"
+ },
+ {
+  "round": 23,
+  "event": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "2025-11-30",
+  "is_past": true,
+  "slug": "2025_qatar"
+ },
+ {
+  "round": 24,
+  "event": "Abu Dhabi Grand Prix",
+  "location": "Yas Island",
+  "date": "2025-12-07",
+  "is_past": true,
+  "slug": "2025_abu-dhabi"
+ }
+]

@@ -1,0 +1,194 @@
+[
+ {
+  "round": 1,
+  "event": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "2024-03-02",
+  "is_past": true,
+  "slug": "2024_bahrain"
+ },
+ {
+  "round": 2,
+  "event": "Saudi Arabian Grand Prix",
+  "location": "Jeddah",
+  "date": "2024-03-09",
+  "is_past": true,
+  "slug": "2024_saudi-arabian"
+ },
+ {
+  "round": 3,
+  "event": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "2024-03-24",
+  "is_past": true,
+  "slug": "2024_australian"
+ },
+ {
+  "round": 4,
+  "event": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "2024-04-07",
+  "is_past": true,
+  "slug": "2024_japanese"
+ },
+ {
+  "round": 5,
+  "event": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "2024-04-21",
+  "is_past": true,
+  "slug": "2024_chinese"
+ },
+ {
+  "round": 6,
+  "event": "Miami Grand Prix",
+  "location": "Miami",
+  "date": "2024-05-05",
+  "is_past": true,
+  "slug": "2024_miami"
+ },
+ {
+  "round": 7,
+  "event": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "2024-05-19",
+  "is_past": true,
+  "slug": "2024_emilia-romagna"
+ },
+ {
+  "round": 8,
+  "event": "Monaco Grand Prix",
+  "location": "Monaco",
+  "date": "2024-05-26",
+  "is_past": true,
+  "slug": "2024_monaco"
+ },
+ {
+  "round": 9,
+  "event": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "2024-06-09",
+  "is_past": true,
+  "slug": "2024_canadian"
+ },
+ {
+  "round": 10,
+  "event": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "2024-06-23",
+  "is_past": true,
+  "slug": "2024_spanish"
+ },
+ {
+  "round": 11,
+  "event": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "2024-06-30",
+  "is_past": true,
+  "slug": "2024_austrian"
+ },
+ {
+  "round": 12,
+  "event": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "2024-07-07",
+  "is_past": true,
+  "slug": "2024_british"
+ },
+ {
+  "round": 13,
+  "event": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "2024-07-21",
+  "is_past": true,
+  "slug": "2024_hungarian"
+ },
+ {
+  "round": 14,
+  "event": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "2024-07-28",
+  "is_past": true,
+  "slug": "2024_belgian"
+ },
+ {
+  "round": 15,
+  "event": "Dutch Grand Prix",
+  "location": "Zandvoort",
+  "date": "2024-08-25",
+  "is_past": true,
+  "slug": "2024_dutch"
+ },
+ {
+  "round": 16,
+  "event": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "2024-09-01",
+  "is_past": true,
+  "slug": "2024_italian"
+ },
+ {
+  "round": 17,
+  "event": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "2024-09-15",
+  "is_past": true,
+  "slug": "2024_azerbaijan"
+ },
+ {
+  "round": 18,
+  "event": "Singapore Grand Prix",
+  "location": "Marina Bay",
+  "date": "2024-09-22",
+  "is_past": true,
+  "slug": "2024_singapore"
+ },
+ {
+  "round": 19,
+  "event": "United States Grand Prix",
+  "location": "Austin",
+  "date": "2024-10-20",
+  "is_past": true,
+  "slug": "2024_united-states"
+ },
+ {
+  "round": 20,
+  "event": "Mexico City Grand Prix",
+  "location": "Mexico City",
+  "date": "2024-10-27",
+  "is_past": true,
+  "slug": "2024_mexico-city"
+ },
+ {
+  "round": 21,
+  "event": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "2024-11-03",
+  "is_past": true,
+  "slug": "2024_s\u00e3o-paulo"
+ },
+ {
+  "round": 22,
+  "event": "Las Vegas Grand Prix",
+  "location": "Las Vegas",
+  "date": "2024-11-23",
+  "is_past": true,
+  "slug": "2024_las-vegas"
+ },
+ {
+  "round": 23,
+  "event": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "2024-12-01",
+  "is_past": true,
+  "slug": "2024_qatar"
+ },
+ {
+  "round": 24,
+  "event": "Abu Dhabi Grand Prix",
+  "location": "Yas Island",
+  "date": "2024-12-08",
+  "is_past": true,
+  "slug": "2024_abu-dhabi"
+ }
+]

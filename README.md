@@ -25,14 +25,48 @@ Ingest more races (FastF1 rate-limits at 500 calls/hour):
 
 | File | Role |
 |---|---|
-| `ingest.py` | FastF1 → per-race Parquet + `data/catalog.json` |
-| `dataio.py` | Loading and repair (reconstructs missing tyre age) |
+| `ingestcore.py` | FastF1 session → normalised lap table (used by CLI and worker) |
+| `ingest.py` | Batch CLI over whole seasons |
+| `schedule.py` | Cached season schedules, so the picker can offer un-ingested races |
+| `jobs.py` | Async ingest queue, worker pool, rate limiting |
+| `dataio.py` | Storage boundary: load, repair, save, index |
 | `model.py` | Fuel-corrected degradation model |
 | `strategy.py` | Pit-window search, undercut/overcut analysis |
 | `api.py` | FastAPI service |
 | `static/index.html` | Front end |
 | `validate.py` | Out-of-sample model validation |
 | `backtest.py` | Recommendations vs. what teams actually did |
+
+## On-demand ingest
+
+The UI offers every race from 2018 to the current season. If a race is not in
+the store, requesting it queues a background fetch and the UI polls until it is
+ready — typically well under a minute.
+
+This has to be asynchronous. A FastF1 race load takes 1–2 minutes uncached and
+the upstream API rate-limits at **500 calls/hour** (~11 calls per race, so ~45
+races/hour). No user waits that long on a dropdown, and an API gateway would
+time out regardless. So the API accepts a request, returns a job id, and a
+worker does the fetch.
+
+The local implementation is deliberately shaped like its cloud counterpart, so
+migrating swaps implementations rather than reshaping the API:
+
+| Local | AWS |
+|---|---|
+| SQLite `jobs` table | DynamoDB (job status + dedup) |
+| in-process queue | SQS + dead-letter queue |
+| worker threads | Lambda consumers, reserved concurrency |
+| `RateLimiter` (35 races/hour) | Step Functions Map with a concurrency cap |
+| `data/*.parquet` | S3 |
+
+Jobs deduplicate on race slug, retry upstream throttling with backoff, cap at 3
+attempts, and reset to `queued` if the process dies mid-fetch so a crash cannot
+strand a race.
+
+Note that **Kafka does not fit this design.** Its justification — many consumers
+reading one ordered lap stream — belongs to a live telemetry replay path, not to
+on-demand batch ingest. Forcing it in here would be decoration.
 
 ## The modelling problem
 
@@ -111,6 +145,8 @@ Teams are not a perfect oracle, so agreement is evidence rather than proof.
 
 ## Data
 
-45 races (2024 ×24, 2025 ×21) via FastF1. The last three 2025 rounds are missing
-— the ingest hit FastF1's 500-calls/hour limit; re-running picks them up, as the
-catalog preserves existing entries.
+Ships with 46 races (2024 ×24, 2025 ×21, plus 2026 Japan as an on-demand test).
+Any other race from 2018 onward is fetchable from the UI on request.
+
+The last three 2025 rounds are absent because the bulk ingest hit FastF1's
+500-calls/hour limit. They can now simply be requested from the picker.
