@@ -96,24 +96,21 @@ fi
 aws lambda wait function-updated --function-name "${FUNCTION_NAME}" \
   --region "${AWS_REGION}"
 
-# --- 5. public URL --------------------------------------------------------- #
-if aws lambda get-function-url-config --function-name "${FUNCTION_NAME}" \
-     --region "${AWS_REGION}" >/dev/null 2>&1; then
-  say "function URL exists"
+# --- 5. done ---------------------------------------------------------------- #
+# No Function URL is created. This account blocks public ones - every request 403s
+# before the function is invoked, with a provably correct AuthType=NONE config and
+# resource policy. Creating one anyway just leaves a dead endpoint and a public
+# invoke permission behind on every deploy. Run deploy/deploy-apigw.sh instead; it
+# is idempotent and reuses the existing HTTP API.
+say "function updated"
+API_ID=$(aws apigatewayv2 get-apis --region "${AWS_REGION}" \
+  --query "Items[?Name=='${APP_NAME}-http'].ApiId | [0]" --output text 2>/dev/null)
+if [ -n "${API_ID}" ] && [ "${API_ID}" != "None" ]; then
+  ENDPOINT=$(aws apigatewayv2 get-api --api-id "${API_ID}" --region "${AWS_REGION}" \
+    --query ApiEndpoint --output text)
+  echo "  ${ENDPOINT}"
+  echo
+  echo "  smoke test:  curl -s ${ENDPOINT}/healthz"
 else
-  say "creating public function URL"
-  # AuthType NONE makes this publicly reachable, which is the point of a
-  # portfolio deployment. The function is read-only and holds no secrets.
-  aws lambda create-function-url-config --function-name "${FUNCTION_NAME}" \
-    --auth-type NONE --region "${AWS_REGION}" >/dev/null
-  aws lambda add-permission --function-name "${FUNCTION_NAME}" \
-    --statement-id public-function-url --action lambda:InvokeFunctionUrl \
-    --principal '*' --function-url-auth-type NONE --region "${AWS_REGION}" >/dev/null
+  echo "  no HTTP API yet - run deploy/deploy-apigw.sh to expose it"
 fi
-
-URL=$(aws lambda get-function-url-config --function-name "${FUNCTION_NAME}" \
-        --region "${AWS_REGION}" --query FunctionUrl --output text)
-say "deployed"
-echo "  ${URL}"
-echo
-echo "  smoke test:  curl -s ${URL}healthz"
