@@ -93,10 +93,20 @@ Container image on Lambda, exposed through an API Gateway HTTP API. Race data an
 season schedules are baked into the image: 47 races is ~1.5MB of Parquet, cheaper
 and faster than an S3 round trip per request.
 
-```
-FastF1 ──▶ ingest ──▶ Parquet + catalog ──▶ pace model ──▶ strategy search ──▶ API ──▶ UI
-                                                    (fit on laps 1..N only)
-```
+[![Architecture](docs/screenshots/04-architecture.png)](https://mq1yvieau8.execute-api.us-east-1.amazonaws.com/architecture)
+
+**[Open the interactive diagram →](https://mq1yvieau8.execute-api.us-east-1.amazonaws.com/architecture)**
+ · [read it as text](docs/architecture/architecture.md)
+
+Click through three flows — a strategy request, on-demand ingest, and build and
+deploy — with the payload at each step. The mode toggle swaps between the
+deployed AWS path and local development: API Gateway, ECR and CloudWatch
+disappear locally, the queue and FastF1 appear, and the Lambda node becomes
+uvicorn. Nodes are clickable and draggable.
+
+The step shown above is the one that matters most: the pace model is fit on laps
+1..N only, so a replayed call is a decision rather than hindsight.
+
 
 ### What actually runs on AWS
 

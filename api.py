@@ -273,6 +273,23 @@ def healthz():
             "ingest_enabled": INGEST_ENABLED}
 
 
+@app.get("/architecture", include_in_schema=False)
+def architecture():
+    """The interactive architecture diagram.
+
+    Served from the app so the README can link to something clickable - GitHub
+    renders HTML files as source, not as a page.
+    """
+    # The container image copies it into static/; a local checkout has it under
+    # docs/. Checking both keeps a single source of truth in the repository.
+    root = pathlib.Path(__file__).parent
+    for page in (root / "static" / "architecture.html",
+                 root / "docs" / "architecture" / "architecture.html"):
+        if page.exists():
+            return FileResponse(page)
+    raise HTTPException(404, "architecture diagram not bundled in this build")
+
+
 @app.get("/", include_in_schema=False)
 def index():
     ui = pathlib.Path(__file__).parent / "static" / "index.html"

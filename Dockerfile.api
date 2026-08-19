@@ -10,6 +10,8 @@ RUN pip install --no-cache-dir -r ${LAMBDA_TASK_ROOT}/requirements-api.txt
 COPY api.py dataio.py model.py strategy.py schedule.py jobs.py ${LAMBDA_TASK_ROOT}/
 COPY lambda_app.py ${LAMBDA_TASK_ROOT}/
 COPY static/ ${LAMBDA_TASK_ROOT}/static/
+# Single source of truth lives in docs/; copied in rather than duplicated.
+COPY docs/architecture/architecture.html ${LAMBDA_TASK_ROOT}/static/architecture.html
 
 # Race data + pre-cached schedules. Explicit copies keep local artefacts such as
 # jobs.db and the FastF1 HTTP cache out of the image.
