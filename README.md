@@ -37,7 +37,7 @@ Ingest more races (FastF1 rate-limits at 500 calls/hour):
 | `backfill_colors.py` | One-off: add liveries to races ingested before colours existed |
 | `lambda_app.py` | Lambda entrypoint (Mangum ASGI adapter) |
 | `Dockerfile.api` | Read-path container image |
-| `deploy/` | preflight, deploy, teardown scripts |
+| `deploy/` | preflight, deploy (Lambda + API Gateway), teardown |
 | `validate.py` | Out-of-sample model validation |
 | `backtest.py` | Recommendations vs. what teams actually did |
 
@@ -78,19 +78,44 @@ Phase 1 ships the read path as a container image on Lambda behind a public
 Function URL. Race data and season schedules are baked into the image — 47 races
 is ~1.5MB of Parquet, cheaper and faster than an S3 round trip per request.
 
+**Live:** https://mq1yvieau8.execute-api.us-east-1.amazonaws.com
+
 ```bash
 bash deploy/preflight.sh     # checks credentials, docker, data, schedules
 bash deploy/deploy-api.sh    # build, push to ECR, create/update the function
+bash deploy/deploy-apigw.sh  # expose it through an HTTP API
 bash deploy/teardown.sh      # remove everything so nothing keeps billing
 ```
+
+### Why API Gateway rather than a Lambda Function URL
+
+The obvious deployment is a public Function URL, and it does not work in this
+account: every request returns 403 before the function is invoked, with a
+provably correct `AuthType=NONE` config and resource policy. AWS has been
+defaulting new accounts to block public function URLs.
+
+Putting CloudFront in front with Origin Access Control — the pattern AWS
+recommends instead — failed the same way. The diagnosis came from three
+observations: a manually SigV4-signed request from an IAM user returned 200, the
+function's log group showed that request but never a CloudFront one, and the
+account is not in an Organization so no SCP explains it. The distinguishing
+factor is that the IAM user is authorised by an *identity* policy while
+CloudFront relies solely on the *resource* policy, which the account-level block
+appears to override.
+
+An HTTP API sidesteps function URLs entirely, invoking the function through
+`lambda:InvokeFunction` with the `apigateway` service principal — the most
+standard integration in AWS. Cold start ~0.33s, warm ~0.28s.
 
 Prerequisites: AWS credentials (`aws configure`) and a reachable Docker daemon.
 On WSL that means enabling WSL integration in Docker Desktop's settings.
 
 **Cost.** Lambda's always-free tier covers 1M requests and 400,000 GB-seconds per
-month, so this runs at $0 at portfolio traffic. ECR storage is the only real
-charge — about $0.05/month for a 500MB image once the 12-month 500MB allowance
-lapses, and a lifecycle policy keeps only the last 3 images.
+month. API Gateway gives 1M requests/month free for 12 months, then $1.00 per
+million. ECR storage is about $0.05/month for a 500MB image once the 12-month
+500MB allowance lapses; a lifecycle policy expires untagged images after 14 days,
+which is what actually reclaims space since each push orphans the previous
+`latest`. At portfolio traffic the whole thing is a few cents a month.
 
 **The API image deliberately omits FastF1.** It pulls matplotlib, scipy, and
 cryptography, none of which the read path uses. Schedules are pre-cached into the

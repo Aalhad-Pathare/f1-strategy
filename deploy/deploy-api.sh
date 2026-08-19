@@ -23,9 +23,16 @@ else
   aws ecr create-repository --repository-name "${ECR_REPO}" \
     --region "${AWS_REGION}" \
     --image-scanning-configuration scanOnPush=true >/dev/null
+  # Bound storage growth: each push orphans the previous 'latest', so expiring
+  # untagged images is what actually reclaims space. An imageCountMoreThanN rule
+  # would be the obvious choice but ECR rejects it here ("matched 0 out of 4"),
+  # including in its tagPatternList form - so use the form the API accepts.
+  #
+  # Non-fatal: this is a ~$0.05/month optimisation and must never block a deploy.
   aws ecr put-lifecycle-policy --repository-name "${ECR_REPO}" \
     --region "${AWS_REGION}" --lifecycle-policy-text \
-    '{"rules":[{"rulePriority":1,"description":"keep last 3","selection":{"tagStatus":"any","countType":"imageCountMoreThanN","countNumber":3},"action":{"type":"expire"}}]}' >/dev/null
+    '{"rules":[{"rulePriority":1,"description":"expire untagged after 14 days","selection":{"tagStatus":"untagged","countType":"sinceImagePushed","countUnit":"days","countNumber":14},"action":{"type":"expire"}}]}' >/dev/null \
+    || say "lifecycle policy not applied (non-fatal)"
 fi
 
 # --- 2. build + push ------------------------------------------------------- #
@@ -38,7 +45,13 @@ TAG=$(git rev-parse --short HEAD 2>/dev/null || date +%Y%m%d%H%M%S)
 say "building image (linux/amd64) tag ${TAG}"
 # Platform is pinned: Lambda rejects an image whose architecture does not match
 # the function's, and an accidental arm64 build fails in a confusing way.
-docker build --platform linux/amd64 -f Dockerfile.api -t "${ECR_REPO}:${TAG}" .
+#
+# Attestations must be off. Buildx (the default builder since Docker 23) attaches
+# provenance and SBOM attestations, which turn the push into a manifest list.
+# Lambda rejects that with "image manifest, config or layer media type ... is not
+# supported" - an error that points at the image rather than at the build flags.
+docker build --platform linux/amd64 --provenance=false --sbom=false \
+  -f Dockerfile.api -t "${ECR_REPO}:${TAG}" .
 docker tag "${ECR_REPO}:${TAG}" "${URI}:${TAG}"
 docker tag "${ECR_REPO}:${TAG}" "${URI}:latest"
 
