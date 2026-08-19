@@ -1,0 +1,4 @@
+# Ingest worker image: needs fastf1 to fetch and normalise sessions.
+-r requirements-api.txt
+fastf1==3.8.3
+boto3==1.42.9

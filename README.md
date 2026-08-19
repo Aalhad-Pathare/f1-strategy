@@ -35,6 +35,9 @@ Ingest more races (FastF1 rate-limits at 500 calls/hour):
 | `api.py` | FastAPI service |
 | `static/index.html` | Front end (F1 palette, official team liveries) |
 | `backfill_colors.py` | One-off: add liveries to races ingested before colours existed |
+| `lambda_app.py` | Lambda entrypoint (Mangum ASGI adapter) |
+| `Dockerfile.api` | Read-path container image |
+| `deploy/` | preflight, deploy, teardown scripts |
 | `validate.py` | Out-of-sample model validation |
 | `backtest.py` | Recommendations vs. what teams actually did |
 
@@ -68,6 +71,37 @@ strand a race.
 Note that **Kafka does not fit this design.** Its justification — many consumers
 reading one ordered lap stream — belongs to a live telemetry replay path, not to
 on-demand batch ingest. Forcing it in here would be decoration.
+
+## Deployment
+
+Phase 1 ships the read path as a container image on Lambda behind a public
+Function URL. Race data and season schedules are baked into the image — 47 races
+is ~1.5MB of Parquet, cheaper and faster than an S3 round trip per request.
+
+```bash
+bash deploy/preflight.sh     # checks credentials, docker, data, schedules
+bash deploy/deploy-api.sh    # build, push to ECR, create/update the function
+bash deploy/teardown.sh      # remove everything so nothing keeps billing
+```
+
+Prerequisites: AWS credentials (`aws configure`) and a reachable Docker daemon.
+On WSL that means enabling WSL integration in Docker Desktop's settings.
+
+**Cost.** Lambda's always-free tier covers 1M requests and 400,000 GB-seconds per
+month, so this runs at $0 at portfolio traffic. ECR storage is the only real
+charge — about $0.05/month for a 500MB image once the 12-month 500MB allowance
+lapses, and a lifecycle policy keeps only the last 3 images.
+
+**The API image deliberately omits FastF1.** It pulls matplotlib, scipy, and
+cryptography, none of which the read path uses. Schedules are pre-cached into the
+image instead, and `schedule.py` falls back to that cache when a refresh is
+impossible — which is always the case in Lambda, where the filesystem is
+read-only. Only the ingest worker image needs FastF1.
+
+On-demand download is switched off in this deployment (`F1_INGEST=off`), because
+it needs writable storage and a long-lived worker. The UI detects this and says
+so rather than offering a button that cannot work. Phase 2 restores it against S3
+and SQS.
 
 ## The modelling problem
 

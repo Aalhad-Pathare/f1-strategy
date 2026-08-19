@@ -1,0 +1,8 @@
+# API image: read path only. Deliberately excludes fastf1 - schedules are
+# pre-cached into the image, so the ~200MB of matplotlib/scipy/cryptography it
+# pulls in would buy nothing and slow every cold start.
+fastapi==0.121.2
+mangum==0.19.0
+pandas==2.3.3
+numpy==2.5.2
+pyarrow==25.0.1

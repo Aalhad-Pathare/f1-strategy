@@ -11,6 +11,7 @@ from __future__ import annotations
 import dataclasses
 import functools
 import math
+import os
 import pathlib
 from typing import Any
 
@@ -36,11 +37,20 @@ app.add_middleware(
 )
 
 
-JOB_DB = pathlib.Path(__file__).parent / "data" / "jobs.db"
+JOB_DB = pathlib.Path(os.getenv("F1_JOB_DB",
+                                pathlib.Path(__file__).parent / "data" / "jobs.db"))
+
+# On-demand ingest needs writable storage and a long-lived worker. A read-only
+# serverless deployment has neither, so it is switched off there rather than
+# offering the user a button that cannot work. Phase 2 re-enables it against S3
+# and SQS.
+INGEST_ENABLED = os.getenv("F1_INGEST", "on").lower() in ("1", "on", "true", "yes")
 
 
 @app.on_event("startup")
 def _startup() -> None:
+    if not INGEST_ENABLED:
+        return
     jobs.init(JOB_DB)
     jobs.start_workers()
 
@@ -157,6 +167,13 @@ def list_seasons():
             for y in schedule.available_years()]
 
 
+def _rate() -> dict:
+    """Ingest budget, or a disabled marker when ingest is off."""
+    if not INGEST_ENABLED:
+        return {"enabled": False, "used": 0, "limit": 0, "remaining": 0}
+    return {"enabled": True, **jobs.rate_budget()}
+
+
 @app.get("/api/seasons/{year}")
 def season_rounds(year: int):
     """Every round in a season, with whether its data is ready.
@@ -175,7 +192,8 @@ def season_rounds(year: int):
     out = []
     for r in rounds:
         e = dataio.entry(r["slug"])
-        job = jobs.job_for_slug(r["slug"]) if e is None else None
+        job = (jobs.job_for_slug(r["slug"])
+               if e is None and INGEST_ENABLED else None)
         out.append({
             **r,
             "ready": e is not None,
@@ -183,9 +201,10 @@ def season_rounds(year: int):
             "is_wet": bool(set(e["compounds"]) & model.WET_COMPOUNDS) if e else None,
             "job": None if job is None else {"id": job.id, "state": job.state},
             # A race that has not happened cannot be fetched.
-            "ingestable": bool(r["is_past"]) and e is None,
+            "ingestable": bool(r["is_past"]) and e is None and INGEST_ENABLED,
         })
-    return {"year": year, "rounds": out, "rate": jobs.rate_budget()}
+    return {"year": year, "rounds": out, "rate": _rate(),
+            "ingest_enabled": INGEST_ENABLED}
 
 
 @app.post("/api/ingest")
@@ -195,6 +214,8 @@ def request_ingest(year: int, round: int):
     Returns immediately: the fetch takes 1-2 minutes upstream, so the UI polls
     the job rather than holding a request open.
     """
+    if not INGEST_ENABLED:
+        raise HTTPException(503, "on-demand download is disabled in this deployment")
     try:
         rounds = schedule.season(year)
     except Exception as exc:  # noqa: BLE001
@@ -219,6 +240,8 @@ def request_ingest(year: int, round: int):
 
 @app.get("/api/jobs/{job_id}")
 def job_status(job_id: str):
+    if not INGEST_ENABLED:
+        raise HTTPException(503, "on-demand download is disabled in this deployment")
     job = jobs.get_job(job_id)
     if job is None:
         raise HTTPException(404, f"unknown job {job_id!r}")
@@ -232,9 +255,12 @@ def job_status(job_id: str):
 
 @app.get("/api/jobs")
 def list_jobs():
+    if not INGEST_ENABLED:
+        return {"enabled": False, "queue_depth": 0, "rate": _rate(), "jobs": []}
     return {
+        "enabled": True,
         "queue_depth": jobs.queue_depth(),
-        "rate": jobs.rate_budget(),
+        "rate": _rate(),
         "jobs": [{"id": j.id, "slug": j.slug, "state": j.state,
                   "attempts": j.attempts, "error": j.error,
                   "age_s": round(j.age_s, 1)} for j in jobs.recent_jobs()],
@@ -243,7 +269,8 @@ def list_jobs():
 
 @app.get("/healthz")
 def healthz():
-    return {"ok": True, "races": len(dataio.catalog())}
+    return {"ok": True, "races": len(dataio.catalog()),
+            "ingest_enabled": INGEST_ENABLED}
 
 
 @app.get("/", include_in_schema=False)

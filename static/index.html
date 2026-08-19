@@ -214,7 +214,7 @@
 <script>
 const $ = id => document.getElementById(id);
 let RACE = null, LAP = 1, FOCUS = null, TOTAL = 70, timer = null;
-let ROUNDS = [], YEAR = null, POLL = null;
+let ROUNDS = [], YEAR = null, POLL = null, INGEST = true;
 
 // Fallbacks only: real values come from the season's official palette via the API.
 const CMP_FALLBACK = {SOFT:'#DA291C', MEDIUM:'#FFD12E', HARD:'#BFBFB8',
@@ -278,6 +278,7 @@ async function loadSeason(year){
   try { d = await get('/api/seasons/' + year); }
   catch(e){ showFetch(`Could not load the ${year} schedule.`, true); return; }
   ROUNDS = d.rounds;
+  INGEST = d.ingest_enabled !== false;
   showRate(d.rate);
 
   $('race').innerHTML = ROUNDS.map(r => {
@@ -302,6 +303,11 @@ async function onPickRace(){
   if (r.ready){ hideFetch(); $('fetch').hidden = true; await loadRace(r.slug); return; }
   clearRace();
   if (!r.is_past){ $('fetch').hidden = true; showFetch(`${r.event} has not been run yet.`, false); return; }
+  if (!INGEST){
+    $('fetch').hidden = true;
+    showFetch(`${r.event} is not part of this deployment's dataset, and on-demand download is disabled here.`, false);
+    return;
+  }
   $('fetch').hidden = false;
   if (r.job){ showFetch(`Downloading ${r.event}…`, false, true); pollJob(r.job.id); }
   else showFetch(`${r.event} is not downloaded yet — fetching takes up to a minute or two.`, false);
@@ -425,7 +431,11 @@ const showFetch = (msg,isErr,spin=false) => {
   $('fetchMsg').textContent = msg;
 };
 const hideFetch = () => { $('fetchBar').hidden = true; };
-const showRate = rate => { $('rate').textContent = `${rate.remaining}/${rate.limit} downloads left this hour`; };
+const showRate = rate => {
+  $('rate').textContent = rate && rate.enabled === false
+    ? 'read-only dataset'
+    : `${rate.remaining}/${rate.limit} downloads left this hour`;
+};
 
 function clearRace(){
   RACE = null;

@@ -1,0 +1,12 @@
+.venv/
+.fastf1_cache/
+__pycache__/
+*.pyc
+*.log
+.git/
+data/jobs.db
+validate.py
+backtest.py
+backfill_colors.py
+ingest.py
+ingestcore.py

@@ -1,0 +1,178 @@
+[
+ {
+  "round": 1,
+  "event": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "2021-03-28",
+  "is_past": true,
+  "slug": "2021_bahrain"
+ },
+ {
+  "round": 2,
+  "event": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "2021-04-18",
+  "is_past": true,
+  "slug": "2021_emilia-romagna"
+ },
+ {
+  "round": 3,
+  "event": "Portuguese Grand Prix",
+  "location": "Portim\u00e3o",
+  "date": "2021-05-02",
+  "is_past": true,
+  "slug": "2021_portuguese"
+ },
+ {
+  "round": 4,
+  "event": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "2021-05-09",
+  "is_past": true,
+  "slug": "2021_spanish"
+ },
+ {
+  "round": 5,
+  "event": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "2021-05-23",
+  "is_past": true,
+  "slug": "2021_monaco"
+ },
+ {
+  "round": 6,
+  "event": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "2021-06-06",
+  "is_past": true,
+  "slug": "2021_azerbaijan"
+ },
+ {
+  "round": 7,
+  "event": "French Grand Prix",
+  "location": "Le Castellet",
+  "date": "2021-06-20",
+  "is_past": true,
+  "slug": "2021_french"
+ },
+ {
+  "round": 8,
+  "event": "Styrian Grand Prix",
+  "location": "Spielberg",
+  "date": "2021-06-27",
+  "is_past": true,
+  "slug": "2021_styrian"
+ },
+ {
+  "round": 9,
+  "event": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "2021-07-04",
+  "is_past": true,
+  "slug": "2021_austrian"
+ },
+ {
+  "round": 10,
+  "event": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "2021-07-18",
+  "is_past": true,
+  "slug": "2021_british"
+ },
+ {
+  "round": 11,
+  "event": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "2021-08-01",
+  "is_past": true,
+  "slug": "2021_hungarian"
+ },
+ {
+  "round": 12,
+  "event": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "2021-08-29",
+  "is_past": true,
+  "slug": "2021_belgian"
+ },
+ {
+  "round": 13,
+  "event": "Dutch Grand Prix",
+  "location": "Zandvoort",
+  "date": "2021-09-05",
+  "is_past": true,
+  "slug": "2021_dutch"
+ },
+ {
+  "round": 14,
+  "event": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "2021-09-12",
+  "is_past": true,
+  "slug": "2021_italian"
+ },
+ {
+  "round": 15,
+  "event": "Russian Grand Prix",
+  "location": "Sochi",
+  "date": "2021-09-26",
+  "is_past": true,
+  "slug": "2021_russian"
+ },
+ {
+  "round": 16,
+  "event": "Turkish Grand Prix",
+  "location": "Istanbul",
+  "date": "2021-10-10",
+  "is_past": true,
+  "slug": "2021_turkish"
+ },
+ {
+  "round": 17,
+  "event": "United States Grand Prix",
+  "location": "Austin",
+  "date": "2021-10-24",
+  "is_past": true,
+  "slug": "2021_united-states"
+ },
+ {
+  "round": 18,
+  "event": "Mexico City Grand Prix",
+  "location": "Mexico City",
+  "date": "2021-11-07",
+  "is_past": true,
+  "slug": "2021_mexico-city"
+ },
+ {
+  "round": 19,
+  "event": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "2021-11-14",
+  "is_past": true,
+  "slug": "2021_s\u00e3o-paulo"
+ },
+ {
+  "round": 20,
+  "event": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "2021-11-21",
+  "is_past": true,
+  "slug": "2021_qatar"
+ },
+ {
+  "round": 21,
+  "event": "Saudi Arabian Grand Prix",
+  "location": "Jeddah",
+  "date": "2021-12-05",
+  "is_past": true,
+  "slug": "2021_saudi-arabian"
+ },
+ {
+  "round": 22,
+  "event": "Abu Dhabi Grand Prix",
+  "location": "Yas Island",
+  "date": "2021-12-12",
+  "is_past": true,
+  "slug": "2021_abu-dhabi"
+ }
+]

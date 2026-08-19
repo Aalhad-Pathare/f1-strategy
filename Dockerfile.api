@@ -1,0 +1,21 @@
+# Read-path API on Lambda. Data and schedules are baked into the image: 47 races
+# is ~1.5MB of Parquet, far cheaper and faster than an S3 round trip per request.
+FROM public.ecr.aws/lambda/python:3.12
+
+COPY requirements-api.txt ${LAMBDA_TASK_ROOT}/
+RUN pip install --no-cache-dir -r ${LAMBDA_TASK_ROOT}/requirements-api.txt
+
+# Application modules. jobs.py is imported by api.py but stays inert with
+# F1_INGEST=off, so it needs no queue backend here.
+COPY api.py dataio.py model.py strategy.py schedule.py jobs.py ${LAMBDA_TASK_ROOT}/
+COPY lambda_app.py ${LAMBDA_TASK_ROOT}/
+COPY static/ ${LAMBDA_TASK_ROOT}/static/
+
+# Race data + pre-cached schedules. Explicit copies keep local artefacts such as
+# jobs.db and the FastF1 HTTP cache out of the image.
+COPY data/catalog.json ${LAMBDA_TASK_ROOT}/data/
+COPY data/schedules/ ${LAMBDA_TASK_ROOT}/data/schedules/
+COPY data/*.parquet ${LAMBDA_TASK_ROOT}/data/
+
+ENV F1_INGEST=off
+CMD ["lambda_app.handler"]

@@ -1,0 +1,170 @@
+[
+ {
+  "round": 1,
+  "event": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "2018-03-25",
+  "is_past": true,
+  "slug": "2018_australian"
+ },
+ {
+  "round": 2,
+  "event": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "2018-04-08",
+  "is_past": true,
+  "slug": "2018_bahrain"
+ },
+ {
+  "round": 3,
+  "event": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "2018-04-15",
+  "is_past": true,
+  "slug": "2018_chinese"
+ },
+ {
+  "round": 4,
+  "event": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "2018-04-29",
+  "is_past": true,
+  "slug": "2018_azerbaijan"
+ },
+ {
+  "round": 5,
+  "event": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "2018-05-13",
+  "is_past": true,
+  "slug": "2018_spanish"
+ },
+ {
+  "round": 6,
+  "event": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "2018-05-27",
+  "is_past": true,
+  "slug": "2018_monaco"
+ },
+ {
+  "round": 7,
+  "event": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "2018-06-10",
+  "is_past": true,
+  "slug": "2018_canadian"
+ },
+ {
+  "round": 8,
+  "event": "French Grand Prix",
+  "location": "Le Castellet",
+  "date": "2018-06-24",
+  "is_past": true,
+  "slug": "2018_french"
+ },
+ {
+  "round": 9,
+  "event": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "2018-07-01",
+  "is_past": true,
+  "slug": "2018_austrian"
+ },
+ {
+  "round": 10,
+  "event": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "2018-07-08",
+  "is_past": true,
+  "slug": "2018_british"
+ },
+ {
+  "round": 11,
+  "event": "German Grand Prix",
+  "location": "Hockenheim",
+  "date": "2018-07-22",
+  "is_past": true,
+  "slug": "2018_german"
+ },
+ {
+  "round": 12,
+  "event": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "2018-07-29",
+  "is_past": true,
+  "slug": "2018_hungarian"
+ },
+ {
+  "round": 13,
+  "event": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "2018-08-26",
+  "is_past": true,
+  "slug": "2018_belgian"
+ },
+ {
+  "round": 14,
+  "event": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "2018-09-02",
+  "is_past": true,
+  "slug": "2018_italian"
+ },
+ {
+  "round": 15,
+  "event": "Singapore Grand Prix",
+  "location": "Singapore",
+  "date": "2018-09-16",
+  "is_past": true,
+  "slug": "2018_singapore"
+ },
+ {
+  "round": 16,
+  "event": "Russian Grand Prix",
+  "location": "Sochi",
+  "date": "2018-09-30",
+  "is_past": true,
+  "slug": "2018_russian"
+ },
+ {
+  "round": 17,
+  "event": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "2018-10-07",
+  "is_past": true,
+  "slug": "2018_japanese"
+ },
+ {
+  "round": 18,
+  "event": "United States Grand Prix",
+  "location": "Austin",
+  "date": "2018-10-21",
+  "is_past": true,
+  "slug": "2018_united-states"
+ },
+ {
+  "round": 19,
+  "event": "Mexican Grand Prix",
+  "location": "Mexico City",
+  "date": "2018-10-28",
+  "is_past": true,
+  "slug": "2018_mexican"
+ },
+ {
+  "round": 20,
+  "event": "Brazilian Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "2018-11-11",
+  "is_past": true,
+  "slug": "2018_brazilian"
+ },
+ {
+  "round": 21,
+  "event": "Abu Dhabi Grand Prix",
+  "location": "Yas Marina",
+  "date": "2018-11-25",
+  "is_past": true,
+  "slug": "2018_abu-dhabi"
+ }
+]

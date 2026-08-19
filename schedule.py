@@ -38,12 +38,35 @@ def _fresh(path: pathlib.Path, year: int) -> bool:
 
 
 def season(year: int, force: bool = False) -> list[dict]:
-    """Rounds in a season: [{round, event, date, is_past}]."""
-    path = _path(year)
-    if not force and _fresh(path, year):
-        return json.loads(path.read_text())
+    """Rounds in a season: [{round, event, date, is_past}].
 
-    import fastf1  # imported lazily: only needed on a cache miss
+    Falls back to a stale cache when a refresh is impossible. That is the normal
+    case in a serverless deployment: the API image ships the cache and omits
+    FastF1 entirely (it pulls matplotlib, scipy and cryptography for no benefit
+    on a read path), and the filesystem is read-only anyway. A schedule that is a
+    few days stale is far better than a failed request.
+    """
+    path = _path(year)
+    cached: list[dict] | None = None
+    if path.exists():
+        try:
+            cached = json.loads(path.read_text())
+        except (OSError, ValueError):
+            cached = None
+
+    if not force and cached is not None and _fresh(path, year):
+        return cached
+
+    try:
+        return _refresh(year, path)
+    except Exception:  # noqa: BLE001 - missing fastf1, no network, read-only fs
+        if cached is not None:
+            return cached
+        raise
+
+
+def _refresh(year: int, path: pathlib.Path) -> list[dict]:
+    import fastf1  # imported lazily: absent from the API image by design
 
     import ingestcore
     ingestcore.enable_cache()
@@ -71,6 +94,9 @@ def season(year: int, force: bool = False) -> list[dict]:
             "slug": ingestcore.race_slug(year, str(ev.get("EventName", ""))),
         })
 
-    CACHE.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(out, indent=1))
+    try:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(out, indent=1))
+    except OSError:
+        pass  # read-only filesystem (Lambda): serve the fetched value uncached
     return out
