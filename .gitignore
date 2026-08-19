@@ -5,6 +5,9 @@ __pycache__/
 *.pyc
 *.log
 
+# Local ingest job state; the deployed build does not use it.
+data/jobs.db
+
 # Race Parquet IS committed: it is only ~1.5MB for 45 races, and FastF1's
 # 500-calls/hour limit means regenerating it from scratch takes about an hour.
 # Keeping it in the repo makes a clone immediately runnable and lets the
